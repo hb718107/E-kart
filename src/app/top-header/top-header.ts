@@ -3,7 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSquareCaretLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: '[top-header]',
+  selector: 'top-header',
   imports: [FontAwesomeModule],
   templateUrl: './top-header.html',
   styleUrl: './top-header.css',
