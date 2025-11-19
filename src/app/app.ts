@@ -13,5 +13,5 @@ import { ProductList } from './product-list/product-list';
 })
 export class App {
    title = 'angular-ekart';
-   imgUrl = signal('assets/123.jpg');
+
 }
