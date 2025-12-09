@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductLister } from '../../../Models/Product';
 
 @Component({
   selector: 'app-product',
@@ -10,20 +11,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class Product {
  @Input()
- product: {
-      id: number,
-      name: string,
-      description: string,
-      brand: string,
-      gender: string,
-      category: string,
-      size: number[],
-      color: string[],
-      price: number,
-      discountPrice?:number,
-      is_in_inventory: boolean,
-      items_left: number,
-      imageURL:string,
-      slug: string
- }
+ product: ProductLister;
 }

@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { Search } from '../search/search';
 import { Product } from './product/product';
 import { Filter } from './filter/filter';
+import { ProductLister } from '../../Models/Product';
 
 @Component({
   selector: 'product-list',
   imports: [CommonModule, Search,Product,Filter],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
+  providers: [ProductLister],
 })
 export class ProductList {
+  selectedProduct: ProductLister;
   products = [
     {
       id: 1,
@@ -361,5 +364,8 @@ export class ProductList {
   searchText: string = '';
   onFilterChange(value:string){
     this.selectedFilterRadioButton = value;
+
+    
 }
+ productnotavailablemessage:string="No products available";
 }

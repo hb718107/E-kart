@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCartShopping,faEye,faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
@@ -20,9 +20,11 @@ export class Search {
     this.searchtextchanged.emit(this.searchText);
   }
 
-  // updateSearchText(event : any){
-  //   this.searchText = event.target.value;
-  // }
+  updateSearchText(inputElement: HTMLInputElement){
+    // console.log(inputElement.value);
+    this.searchText = inputElement.value;
+    this.searchtextchanged.emit(this.searchText);
+  }
 
   icons ={
     search : faEye,
