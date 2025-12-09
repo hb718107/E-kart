@@ -40,4 +40,8 @@ export class Container {
 //   this.addToCart++;
 //   }
 // }
+searchText : string = '';
+setSearchText(value : string){
+  this.searchText = value;
+}
 }

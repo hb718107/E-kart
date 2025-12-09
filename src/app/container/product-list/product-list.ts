@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Search } from '../search/search';
 import { Product } from './product/product';
@@ -167,11 +167,198 @@ export class ProductList {
       imageURL: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/178b2a46-3ee4-492b-882e-f71efdd53a36/air-force-1-big-kids-shoe-2zqp8D.jpg",
       slug: "nike-air-force-1"
     },
+     {
+      id: 11,
+      name: "Nike Air Max 90",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "NIKE",
+      gender: "KIDS",
+      category: "CASUAL",
+      size: [6, 7, 8, 9],
+      color: ["White", "Blue", "Black"],
+      price: 100,
+      discountPrice:75,
+      is_in_inventory: true,
+      items_left: 3,
+      imageURL: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/8439f823-86cf-4086-81d2-4f9ff9a66866/air-max-90-big-kids-shoe-1wzwJM.jpg",
+      slug: "nike-air-max-90"
+    },
+    {
+      id: 12,
+      name: "Nike Air Max 90 LTR",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "NIKE",
+      gender: "KIDS",
+      category: "CASUAL",
+      size: [6, 7, 8, 9, 10],
+      color: ["White", "Blue", "Black", "Red"],
+      price: 110,
+      is_in_inventory: false,
+      items_left: 3,
+      imageURL: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i1-620aeb37-1b28-44b0-9b14-5572f8cbc948/air-max-90-ltr-big-kids-shoe-hdNLQ5.jpg",
+      slug: "nike-air-max-90-ltr"
+    },
+    {
+      id: 13,
+      name: "Nike Joyride Dual Run",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "NIKE",
+      gender: "KIDS",
+      category: "RUNNING",
+      size: [6, 7, 8, 9, 10],
+      color: ["White", "Blue", "Black"],
+      price: 110,
+      is_in_inventory: false,
+      items_left: 3,
+      imageURL: "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/33888130-0320-41a1-ba53-a026decd8aa2/joyride-dual-run-big-kids-running-shoe-1HDJF8.jpg",
+      slug: "nike-joyride-dual-run"
+    },
+    {
+      id: 14,
+      name: "Nike Renew Run",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "NIKE",
+      gender: "KIDS",
+      category: "RUNNING",
+      size: [6, 7, 8, 9, 10, 11, 12],
+      color: ["White", "Blue", "Black", "Brown", "Red"],
+      price: 80,
+      discountPrice:65,
+      is_in_inventory: true,
+      items_left: 3,
+      imageURL: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/i1-73e54c0b-11a6-478b-9f90-bd97fcde872d/renew-run-big-kids-running-shoe-5Bpz93.jpg",
+      slug: "nike-renew-run"
+    },
+    {
+      id: 16,
+      name: "Bridgport Advice",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "MEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10],
+      color: ["White", "Black"],
+      price: 30,
+      is_in_inventory: false,
+      items_left: 4,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/BRIDGPORT_ADVICE-BLACK_1_800x800.jpg?v=1576567903",
+      slug: "bridgport-advice"
+    },
+    {
+      id: 15,
+      name: "Beck",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "MEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10],
+      color: ["White", "Blue", "Black", "Brown", "Red"],
+      price: 80,
+      discountPrice:45,
+      is_in_inventory: true,
+      items_left: 5,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/Beck-Black_800x800.jpg",
+      slug: "beck"
+    },
+    {
+      id: 17,
+      name: "Fester",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "MEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10, 11, 12],
+      color: ["White", "Blue", "Black"],
+      price: 70,
+      is_in_inventory: true,
+      items_left: 6,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/fester-Tan_800x800.jpg?v=1575537531",
+      slug: "fester"
+    },
+    {
+      id: 18,
+      name: "Pixel",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "MEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10],
+      color: ["White", "Blue", "Black", "Brown", "Red"],
+      price: 75,
+      is_in_inventory: true,
+      items_left: 7,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/PIXEL-TAN_800x800.jpg?v=1577420506",
+      slug: "pixel"
+    },
+    {
+      id: 19,
+      name: "Austin",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "MEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10],
+      color: ["White", "Blue"],
+      price: 75,
+      discountPrice:60,
+      is_in_inventory: false,
+      items_left: 2,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/Austin-Coffee_800x800.jpg?v=1574772988",
+      slug: "austin"
+    },
+    {
+      id: 20,
+      name: "SS-HL-0135",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "WOMEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9],
+      color: ["White", "Blue", "Black"],
+      price: 30,
+      is_in_inventory: true,
+      items_left: 6,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/009240000-11-SS-HL-0135-Black_800x800.jpg?v=1572264270",
+      slug: "ss-hl-0135"
+    },
+    {
+      id: 21,
+      name: "SS-HL-0136",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "WOMEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10, 11, 12],
+      color: ["White", "Blue", "Black"],
+      price: 50,
+      discountPrice:35,
+      is_in_inventory: true,
+      items_left: 4,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/009250000-779-SS-HL-0136-Coffee_800x800.jpg?v=1571900372",
+      slug: "ss-hl-0136"
+    },
+    {
+      id: 22,
+      name: "SS-HL-0128",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      brand: "HUSHPUPPIES",
+      gender: "WOMEN",
+      category: "FORMAL",
+      size: [6, 7, 8, 9, 10, 11, 12],
+      color: ["White", "Blue", "Black", "Brown", "Red"],
+      price: 35,
+      is_in_inventory: true,
+      items_left: 3,
+      imageURL: "https://cdn.shopify.com/s/files/1/0016/0074/9623/products/000300242-484-SS-HL-0128-Blue_800x800.jpg?v=1583235174",
+      slug: "ss-hl-0128"
+    }
   ];
   totalProducts = this.products.length;
   inStockProducts = this.products.filter(product => product.is_in_inventory === true).length;
   outOfStockProducts = this.products.filter(product => product.is_in_inventory === false).length;
   selectedFilterRadioButton: string = 'all';
+  @Input()
+  searchText: string = '';
   onFilterChange(value:string){
     this.selectedFilterRadioButton = value;
 }

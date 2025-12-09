@@ -1,8 +1,8 @@
 <div class="ekart-product-container">
-    <app-search></app-search>
+    <app-search (searchtextchanged)="setSearchText($event)"></app-search>
 </div>
 <div class="prod-list">
-   <product-list></product-list>
+   <product-list [searchText]="searchText"></product-list>
 </div>
     <!-- <div *ngFor=" let items of somenames">
        <p>Current element of array : {{items}}</p>
