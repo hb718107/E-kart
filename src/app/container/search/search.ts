@@ -15,7 +15,6 @@ export class Search {
   searchText : string = ''
   @Output()
   searchtextchanged: EventEmitter<string> = new EventEmitter<string>();
-  // second argument in viewchild is to avoid null errors
   @ViewChild('searchInput') searchInpulEl : ElementRef;
 
   onSearchTextChanged(){
