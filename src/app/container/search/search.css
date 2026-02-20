@@ -5,11 +5,20 @@
 .ekart-search-product-input{
     width: 40%;
     height: 5.5vh;
-    padding: 10px 10px;
+    padding: 10px 15px;
     outline: none;
-    border-radius: 2px;
-    background-color: #efefef;
-    border: #28282b 1px solid;
+    border-radius: 6px 0 0 6px;
+    background-color: rgba(30, 41, 59, 0.6);
+    color: #e2e8f0;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-right: none;
+    transition: all 0.3s ease;
+}
+
+.ekart-search-product-input:focus {
+    background-color: rgba(30, 41, 59, 0.9);
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
 }
 
 .btn{
@@ -17,10 +26,20 @@
     border: none;
 }
 .btn-search{
-    padding: 13.6px 2%;
-    background-color: #28282b;
-    margin-left: -5px;
-    color: #fff;
+    padding: 13.6px 20px;
+    background-color: rgba(56, 189, 248, 0.1);
+    margin-left: 0;
+    color: #38bdf8;
+    border: 1px solid #38bdf8;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #38bdf8;
+    color: #0f172a;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
 }
 .btn-search-disabled{
     padding: 12px 30px;

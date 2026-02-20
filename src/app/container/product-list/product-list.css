@@ -20,13 +20,18 @@
 }
 .ekart--product--item{
     width: 290px;
-    background-color: #FDFEFE;
+    background-color: rgba(30, 41, 59, 0.7); /* Dark semi-transparent */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     margin: 10px 10px;
     padding-top: 10px;
     padding-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    border: #efefef 2px solid;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 12px;
+    color: #e2e8f0;
+    transition: all 0.3s ease;
 }
 
 .ekart-wishlist-sale-container{
@@ -40,6 +45,14 @@
     text-align: right;
     font-size: 22px;
     position: absolute;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.ekart--add--to--wishlist:hover {
+    color: #f43f5e;
+    text-shadow: 0 0 10px rgba(244, 63, 94, 0.8);
 }
 /* Sale tag */
 .ekart-on-sale-tag{
@@ -48,40 +61,48 @@
     margin-top: 10px;
     margin-right:-10px;
     padding: 5px 10px;
-    background-color: #FFC000;
-    color: #28282B;
+    background-color: #38bdf8; /* Cyber blue */
+    color: #0f172a;
     font-weight: bold;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
 }
 
 
 .ekart--add--to--price{
-    padding:1px 5px;
+    padding:2px 8px;
     position:absolute;
-    margin-top: -25px;
-    background-color:#28282B;
-    color:white;
+    margin-top: -30px;
+    margin-left: -10px;
+    background-color: rgba(15, 23, 42, 0.9);
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
 }
 
 .ekart--product--image{
     width: 265px;
     height: 250px;
+    border-radius: 8px;
+    background-color: #ffffff; /* Framing the image to resolve transparency contrast issues */
+    object-fit: contain;
+    padding: 5px;
+    box-sizing: border-box;
 }
 .ekart--product--name{
-    font-size: 14px;
-    color: #28282B;
-    margin-top: 7px;
+    font-size: 15px;
+    color: #fff;
+    margin-top: 12px;
+    font-weight: bold;
 }
 .ekart--product--category,
 .ekart--product--in--stock,
 .ekart--product--available-colors{
     font-size: 12px;
-    color: #999;
+    color: #94a3b8;
     margin-top: 7px;
 }
 .ekart--product--item:hover{
-    -webkit-box-shadow: 0 0 1px #000 inset;
-    -moz-box-shadow: 0 0 1px 3px #000 inset;
-    border: #efefef 0 0 1px 3px #000 inset;
-    box-shadow: 10px 10px 18px #cccccc;
     transform: scale(1.05);
 }

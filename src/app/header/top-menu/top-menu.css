@@ -6,11 +6,13 @@
     padding-right: 30px;
 }
 .b{
-    color: black;
+    color: #94a3b8;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 .b:hover{
-    color: white;
+    color: #38bdf8;
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
 }
 .b:active{
-    color: wheat;
+    color: #f472b6;
 }

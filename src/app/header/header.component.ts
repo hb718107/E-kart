@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faSearch, faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUser, faShoppingCart, faShoePrints } from '@fortawesome/free-solid-svg-icons';
 import { TopMenu } from './top-menu/top-menu';
 import { TopHeader } from "../top-header/top-header";
 import { MainMenu } from './main-menu/main-menu';
@@ -22,7 +22,8 @@ export class HeaderComponent implements OnInit {
   icons = {
     search: faSearch,
     user: faUser,
-    cart: faShoppingCart
+    cart: faShoppingCart,
+    shoe: faShoePrints
   };
 
   cartCount: number = 0;
