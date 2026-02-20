@@ -37,7 +37,12 @@
         <div class="option-group">
           <h4>Available Sizes</h4>
           <div class="size-options">
-            <span *ngFor="let size of product.size" class="size-badge">{{ size }}</span>
+            <span
+              *ngFor="let size of product.size"
+              class="size-badge"
+              [ngClass]="{'active': selectedSize === size}"
+              (click)="selectedSize = size"
+            >{{ size }}</span>
           </div>
         </div>
 
@@ -48,6 +53,8 @@
               *ngFor="let color of product.color"
               class="color-circle"
               [style.background-color]="color"
+              [ngClass]="{'active-color': selectedColor === color}"
+              (click)="selectedColor = color"
             >
             </span>
           </div>
@@ -57,7 +64,7 @@
   </div>
 
   <div class="ekart-product-detail-footer">
-    <button class="btn-add-to-cart"><fa-icon [icon]="icons.buy"></fa-icon> Add to Cart</button>
+    <button class="btn-add-to-cart" (click)="addToCart()"><fa-icon [icon]="icons.buy"></fa-icon> Add to Cart</button>
   </div>
 </div>
 <div class="overlay" (click)="closeProductDetail()"></div>

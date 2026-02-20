@@ -201,6 +201,12 @@
   background-color: #f9f9f9;
 }
 
+.size-badge.active {
+  background-color: #28282b;
+  color: #fff;
+  border-color: #28282b;
+}
+
 .color-options {
   display: flex;
   gap: 15px;
@@ -221,6 +227,11 @@
 .color-circle:hover {
   transform: scale(1.1);
   border-color: #ddd;
+}
+
+.color-circle.active-color {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #333;
 }
 
 /* Footer & Button */

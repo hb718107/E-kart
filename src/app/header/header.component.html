@@ -9,13 +9,18 @@
   </nav>
   <nav class="navbar">
     <div class="logo">
-      <fa-icon [icon]="icons.cart"></fa-icon>
       Ekart
     </div>
     <div class="right-section">
       <main-menu></main-menu>
+      <button class="cart-btn" routerLink="/cart">
+        <div class="cart-icon-wrapper">
+          <fa-icon [icon]="icons.cart"></fa-icon>
+          <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+        </div>
+      </button>
       <button class="login-btn">
-        <fa-icon [icon]="icons.search"></fa-icon>
+        <fa-icon [icon]="icons.user"></fa-icon>
         Login
       </button>
     </div>
