@@ -25,10 +25,10 @@
       <div class="product-price-container">
         <span class="price-label">Price:</span>
         <span class="original-price" *ngIf="product.discountPrice"
-          ><s>${{ product.price }}</s></span
+          ><s>Rs. {{ product.price }}</s></span
         >
         <span class="current-price"
-          >${{ product.discountPrice ? product.discountPrice : product.price }}</span
+          >Rs. {{ product.discountPrice ? product.discountPrice : product.price }}</span
         >
         <span class="tax-note">(Inclusive of all taxes)</span>
       </div>

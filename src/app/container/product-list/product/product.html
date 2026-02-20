@@ -6,10 +6,10 @@
         <div class="ekart-on-sale-tag" *ngIf="product.discountPrice">{{(100 -(product.discountPrice / product.price * 100)).toFixed()}}% OFF</div>
       </div>
       <div class="ekart--product--image">
-          <img [src]="product.imageURL" class="ekart--product--image">
+          <img [src]="product.imageURL" class="ekart--product--image" alt="{{ product.name }}">
       </div>
       <div class="ekart--add--to--price">
-          {{product.price}}
+          Rs. {{product.price}}
       </div>
       <div class="ekart--product--name">{{product.name}}</div>
       <div class="ekart--product--category">{{product.gender}} . {{product.category}} . {{product.brand}}</div>

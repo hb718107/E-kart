@@ -289,3 +289,21 @@
 .ekart-product-detail-body::-webkit-scrollbar-thumb:hover {
   background: #b3b3b3;
 }
+
+@media (max-width: 500px) {
+  .ekart-product-detail-container {
+    max-width: 100%;
+  }
+  .ekart-product-detail-body {
+    padding: 15px;
+  }
+  .product-name {
+    font-size: 1.5rem;
+  }
+  .current-price {
+    font-size: 1.3rem;
+  }
+  .ekart-product-detail-image {
+    max-height: 250px;
+  }
+}

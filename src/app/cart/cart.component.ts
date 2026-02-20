@@ -25,7 +25,6 @@ export class CartComponent implements OnInit {
   constructor(public cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
-    // Subscribe to cart updates
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
     });

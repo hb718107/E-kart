@@ -68,3 +68,16 @@
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .right-section {
+    margin: 10px auto 0;
+  }
+  .logo {
+    font-size: 35px;
+  }
+}
