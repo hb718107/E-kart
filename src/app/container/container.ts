@@ -1,26 +1,38 @@
-import { Component, ViewChild } from '@angular/core';
-import { Search } from './search/search';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductList } from "./product-list/product-list";
 import { ProductDetails } from './product-details/product-details';
-
+import { SearchService } from '../services/search.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'container',
-  imports: [Search, CommonModule, ProductList,ProductDetails],
+  imports: [CommonModule, ProductList, ProductDetails],
   templateUrl: './container.html',
   styleUrl: './container.css',
 })
-export class Container {
+export class Container implements OnInit, OnDestroy {
+  somenames: string[] = ['tony stark', 'bruce banner', 'thor', 'steve rogers', 'natasha romanoff', 'Fury', 'Odin'];
+  searchText: string = '';
+  private searchSubscription: Subscription;
 
-    somenames : string[] = ['tony stark','bruce banner','thor','steve rogers','natasha romanoff','Fury','Odin'];
+  @ViewChild(ProductList) productListComponent: ProductList
 
-searchText : string = '';
-  
-  @ViewChild(ProductList) productListComponent : ProductList
+  constructor(private searchService: SearchService) { }
 
+  ngOnInit() {
+    this.searchSubscription = this.searchService.searchText$.subscribe(text => {
+      this.searchText = text;
+    });
+  }
 
-setSearchText(value : string){
-  this.searchText = value;
-}
+  ngOnDestroy() {
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
+    }
+  }
+
+  setSearchText(value: string) {
+    this.searchText = value;
+  }
 }

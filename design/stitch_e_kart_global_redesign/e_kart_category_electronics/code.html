@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Electronics - E-kart Architectural Commerce</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-tertiary-fixed": "#2a0043", "inverse-surface": "#000d26", "on-primary-fixed-variant": "#002e52", tertiary: "#7c40a1", outline: "#64779d", "inverse-primary": "#0097fc", "on-primary": "#edf3ff", "primary-fixed-dim": "#0097fc", "surface-container": "#e0e8ff", "secondary-fixed-dim": "#a7c4ff", "on-secondary": "#eff2ff", "on-tertiary-fixed-variant": "#57187c", "surface-tint": "#005ea0", "tertiary-fixed-dim": "#ca89f0", "surface-container-highest": "#ceddff", "primary-fixed": "#47a5ff", "surface-container-low": "#ecf0ff", "surface-container-high": "#d7e2ff", "secondary-fixed": "#bdd2ff", "error-container": "#fb5151", "surface-bright": "#f5f6ff", "primary-container": "#47a5ff", "on-primary-fixed": "#000000", "on-surface-variant": "#495c80", "on-tertiary-container": "#4d0972", "surface-dim": "#c1d5ff", "inverse-on-surface": "#8a9dc5", "on-secondary-fixed": "#00336d", "outline-variant": "#9aadd6", "on-tertiary": "#fdeeff", "on-surface": "#1a2e50", "on-secondary-fixed-variant": "#004ea2", "on-primary-container": "#002442", "on-error": "#ffefee", "on-error-container": "#570008", "secondary-container": "#bdd2ff", "tertiary-container": "#d896fe", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#d896fe", secondary: "#0659b5", error: "#b31b25", "on-background": "#1a2e50", "surface-variant": "#ceddff", background: "#f5f6ff", primary: "#005ea0", surface: "#f5f6ff", "on-secondary-container": "#004591", "tertiary-dim": "#6f3394", "secondary-dim": "#004da1", "error-dim": "#9f0519", "primary-dim": "#00528c"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, fontFamily: {headline: ["Public Sans"], body: ["Public Sans"], label: ["Public Sans"], display: "Public Sans"}}}};</script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift { transition: background-color 0.3s ease; }
+        .glass-header { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 sticky bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto font-public-sans tracking-tight">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-black tracking-tighter text-slate-900 dark:text-slate-50" href="#">E-kart</a>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-slate-900 dark:white font-bold border-b-2 border-slate-900 dark:border-slate-50 pb-1" href="#">All Departments</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 transition-opacity duration-300" href="#">Deals</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 transition-opacity duration-300" href="#">Orders</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 transition-opacity duration-300" href="#">Cart</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined">search</span>
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search architecture &amp; tech..." type="text"/>
+</div>
+<div class="flex gap-4">
+<button class="hover:opacity-80 transition-opacity duration-300 scale-95 duration-200 ease-in-out text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<button class="hover:opacity-80 transition-opacity duration-300 scale-95 duration-200 ease-in-out text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<button class="hover:opacity-80 transition-opacity duration-300 scale-95 duration-200 ease-in-out text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-screen-2xl mx-auto px-8 py-12 grid grid-cols-12 gap-12">
+<!-- Smart Filtering Sidebar -->
+<aside class="col-span-3 hidden lg:block space-y-10">
+<div>
+<h3 class="text-[0.75rem] font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Department</h3>
+<div class="space-y-3">
+<a class="flex items-center justify-between text-primary font-bold body-md" href="#">
+                        Electronics
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+<a class="block text-on-surface-variant hover:text-primary transition-colors body-md pl-4" href="#">Computing</a>
+<a class="block text-on-surface-variant hover:text-primary transition-colors body-md pl-4" href="#">Photography</a>
+<a class="block text-on-surface-variant hover:text-primary transition-colors body-md pl-4" href="#">Audio</a>
+</div>
+</div>
+<div class="h-px bg-outline-variant/15"></div>
+<div>
+<h3 class="text-[0.75rem] font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Price Range</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary-fixed" type="checkbox"/>
+<span class="body-md">Under $500</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary-fixed" type="checkbox"/>
+<span class="body-md">$500 - $1,000</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary-fixed" type="checkbox"/>
+<span class="body-md">Over $1,000</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-outline-variant/15"></div>
+<div>
+<h3 class="text-[0.75rem] font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Customer Rating</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="flex text-on-tertiary-container">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg">star</span>
+</div>
+<span class="body-md text-on-surface-variant group-hover:text-primary">&amp; Up</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-outline-variant/15"></div>
+<div>
+<h3 class="text-[0.75rem] font-bold uppercase tracking-[0.1em] text-on-surface-variant mb-6">Technical Specs</h3>
+<div class="space-y-6">
+<div>
+<span class="block body-md font-semibold mb-3">RAM Capacity</span>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 text-xs border border-outline-variant rounded hover:border-primary transition-colors">8GB</button>
+<button class="px-3 py-1 text-xs border border-primary bg-primary text-white rounded">16GB</button>
+<button class="px-3 py-1 text-xs border border-outline-variant rounded hover:border-primary transition-colors">32GB</button>
+</div>
+</div>
+<div>
+<span class="block body-md font-semibold mb-3">Resolution</span>
+<div class="space-y-2">
+<label class="flex items-center gap-2 body-md">
+<input class="text-primary focus:ring-primary-fixed" name="res" type="radio"/> 4K Ultra HD
+                            </label>
+<label class="flex items-center gap-2 body-md">
+<input class="text-primary focus:ring-primary-fixed" name="res" type="radio"/> 8K Cinema
+                            </label>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="col-span-12 lg:col-span-9">
+<!-- Hero Title & Sort -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<span class="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-on-primary-container">E-kart Architectural</span>
+<h1 class="text-4xl md:text-5xl font-black tracking-tighter text-primary mt-2">Premium Electronics</h1>
+<p class="text-on-surface-variant mt-4 body-md max-w-xl">Curated high-performance technology designed for professionals who value form as much as function.</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="body-sm font-semibold text-on-surface-variant">Sort by:</span>
+<select class="bg-transparent border-none font-bold text-primary focus:ring-0 cursor-pointer">
+<option>Bestselling</option>
+<option>Price: Low to High</option>
+<option>Newest Arrivals</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-surface-container-low rounded-lg aspect-[4/5] flex items-center justify-center p-8 transition-transform duration-500">
+<div class="absolute top-4 left-4 z-10">
+<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">Bestseller</span>
+</div>
+<button class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+</button>
+<img alt="Luxury laptop" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist high-end silver laptop on a clean white desk with soft architectural shadows and neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCikTPmV5aQuP3rxxTXUx1VZ5CxTQeSqKOSxp-w6iwYzSvKuOZHrSYo1h9N8J1VfKLq8ZPKEz0GBu9DGdmxu2opx8ybupsb1ngqxPYh_sxUcHJYGLHeqnMFFf6BfqVzhJcEzXBNtiIraAeUWabQ5LBC-w0z9mqFRFnEhjl04aOe7WyxsCsl1r3K3MtNQ38oZiqaN-UaDRGM4klco2k7uYI5fkJovq_EdvT-u8NnxICF96TysiaXZmLkTA6f4NnboUTAXIprQIE0Q-8"/>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between items-start">
+<h2 class="title-lg font-bold text-primary group-hover:text-on-primary-container transition-colors">Surface Pro X Edition</h2>
+<span class="font-black text-lg">$1,499</span>
+</div>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] text-on-surface-variant font-bold ml-1">(124)</span>
+</div>
+<p class="body-sm text-on-surface-variant line-clamp-2">16GB RAM, 1TB SSD, 14.4" PixelSense Flow Display. The pinnacle of portable performance.</p>
+<div class="pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Add to Cart</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-surface-container-low rounded-lg aspect-[4/5] flex items-center justify-center p-8">
+<button class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+</button>
+<img alt="Premium headphones" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" data-alt="Modern sleek matte black over-ear headphones in a studio setting with dramatic cinematic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhHD8QogtmXV7W1Xj3xbe8HEDp40sy5g_50dylP6w-1IVYuy44VJGB1HdI3ytCRp7b1nW8eISYrKsRm7GkVi_NmGLuzudpTjbF3zqWQtMXA4dbjz1IgwRnfu9ThQJn82HUw6JMOieh5n2JfxErVnUpktQfaT_zruQTDL5Sz9paJM71_9sHxsf73YjdgPpj7Bna5AC00RuN3NjMk5k4hXrpUUB4UCH6f-V-70HYOrGbrIgB6ltqHJdXc20FKPxoxWkOreaVH4xcJeQ"/>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between items-start">
+<h2 class="title-lg font-bold text-primary group-hover:text-on-primary-container transition-colors">Studio-X Wireless</h2>
+<span class="font-black text-lg">$349</span>
+</div>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-[10px] text-on-surface-variant font-bold ml-1">(89)</span>
+</div>
+<p class="body-sm text-on-surface-variant line-clamp-2">Active noise cancellation with 40-hour battery life and spatial audio support.</p>
+<div class="pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Add to Cart</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-surface-container-low rounded-lg aspect-[4/5] flex items-center justify-center p-8">
+<div class="absolute top-4 left-4 z-10">
+<span class="px-3 py-1 bg-on-tertiary-container text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">New Arrival</span>
+</div>
+<button class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+</button>
+<img alt="Professional Camera" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" data-alt="Professional mirrorless camera with prime lens on a dark textured granite surface with sharp focused details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEB362flHnnc5mdFpH4d83BhHDdyQha5_Dlycge5bsUVkuso6XsPRg2ABjnpwZrclHgPVK-Kx8HbLcGMwkPKEbieKUsj_jkiUKZBT0kOjXbmWdOLRyZfZrfkvJOZDodlCJ-tRKBUNSPjCJipIVVUncCVltbnrGEGp8k6zkA6BLocs8TWROvcKJizuveZQBuQoNbwB9IPWumpum_vNDe8eKcAz27XamkpjvTUlAsugChKSeSJChWAv3kgQ1eQoOTWmLvB6Lm7iG1Hk"/>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between items-start">
+<h2 class="title-lg font-bold text-primary group-hover:text-on-primary-container transition-colors">Lumix GX Series</h2>
+<span class="font-black text-lg">$2,199</span>
+</div>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] text-on-surface-variant font-bold ml-1">(42)</span>
+</div>
+<p class="body-sm text-on-surface-variant line-clamp-2">61.0 MP full-frame sensor with Real-time Eye AF for Humans and Animals.</p>
+<div class="pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Add to Cart</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-surface-container-low rounded-lg aspect-[4/5] flex items-center justify-center p-8">
+<button class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+</button>
+<img alt="Luxury Tablet" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" data-alt="Ultra-thin modern tablet computer lying on a designer wooden table with warm afternoon sunlight and plant shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdYxjZwT3QAwo1E-O_xmmD8iqdYxjkcPGBOOoXNIjX-8cTrQTVIgp7sHIWwBZJhvFLzeqr4jsL_ziz3PKQ5JPaqPkPELSH5PM_wCdHg93nzk1mjXSv0PZ4qEUK1Ow7Bkqn2F2ffHYsf1Q6OcSLhYmcRvUfgSpeuVVA4oLTilBVBWbHZ4L5h2gf-V3Dhh4MOaA5N-axviaEkdmozxZDFOeFkM_jaKSxAM0cavtEsnxW3fWY-gUYvcHLG9eH6nNlMYGNJOS29gD_Tpo"/>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between items-start">
+<h2 class="title-lg font-bold text-primary group-hover:text-on-primary-container transition-colors">Tab Ultra Slate</h2>
+<span class="font-black text-lg">$899</span>
+</div>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-[10px] text-on-surface-variant font-bold ml-1">(211)</span>
+</div>
+<p class="body-sm text-on-surface-variant line-clamp-2">Liquid Retina XDR display, M2 Chip, and Thunderbolt support for pros.</p>
+<div class="pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Add to Cart</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-surface-container-low rounded-lg aspect-[4/5] flex items-center justify-center p-8">
+<button class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+</button>
+<img alt="Minimalist Watch" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" data-alt="Close-up of a high-tech minimalist smartwatch with a white band on a monochromatic gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE8vy2hA6GPCebWD8wBsWBsmkFkrw12bsNds91X3i8xrjl9HJ3vyN-tjC9j0UsQODjTEP3DZTMo9qJSm3SAVbFc4rqQlSAfzHpH1eaMIuOgwQnsmY7M2bH0zM8TjKZ8NuFUWcs7ehT-PHuYoqThBgLTC_njqK-qZgt7DYQavZB04PsGS3VGs11zNyiYQCGk_0UnRVDghTemmI6WZxYUA22bJ8MWDIUFVAJ0gfOwcZ0QShULt5eM2D75iI7Vs4nXlYyr7kaKNESr2w"/>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between items-start">
+<h2 class="title-lg font-bold text-primary group-hover:text-on-primary-container transition-colors">Chronos Smart v4</h2>
+<span class="font-black text-lg">$549</span>
+</div>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] text-on-surface-variant font-bold ml-1">(563)</span>
+</div>
+<p class="body-sm text-on-surface-variant line-clamp-2">Advanced health tracking with titanium housing and 5-day battery life.</p>
+<div class="pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Add to Cart</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group cursor-pointer">
+<div class="relative overflow-hidden bg-surface-container-low rounded-lg aspect-[4/5] flex items-center justify-center p-8">
+<div class="absolute top-4 left-4 z-10">
+<span class="px-3 py-1 bg-error text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">Sale -20%</span>
+</div>
+<button class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+</button>
+<img alt="Smart TV" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" data-alt="Sleek modern ultra-thin television screen showing a vibrant abstract image, set against a dark architectural wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq8bI1k_4gTmdBqiv19qBg7KLCMoqTd-59F589UxhPs9ZPGRHxujX2decBaMzo2cCirb4CYjCLe2fnJmu8rd7hhVs1c2jbOrCMDBn0uvzvcLDTLdcZQ2a35nJ8qt-UNQNu2gg9P0KAD9XsCbUvPAWNtOTIM9Jrif7bPSTUUHO7ZMSvufS9eOH50Y6SJeyunAED_BylkIu2kRCgHngyVz0EKaN6A_B02n4d7V-ZRllk6eSHd-6-V9BC1N_wvhdpg3fVZPlkuP29bQM"/>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between items-start">
+<h2 class="title-lg font-bold text-primary group-hover:text-on-primary-container transition-colors">Cinema Curved OLED</h2>
+<span class="font-black text-lg text-error">$1,299 <span class="text-on-surface-variant line-through text-sm ml-1">$1,599</span></span>
+</div>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-[10px] text-on-surface-variant font-bold ml-1">(15)</span>
+</div>
+<p class="body-sm text-on-surface-variant line-clamp-2">Next-gen curved display with infinite contrast and 120Hz refresh rate.</p>
+<div class="pt-4 flex gap-3">
+<button class="flex-1 bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Add to Cart</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container rounded-lg text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full border border-outline-variant text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full bg-primary text-white font-bold">1</button>
+<button class="w-12 h-12 rounded-full hover:bg-surface-container font-bold">2</button>
+<button class="w-12 h-12 rounded-full hover:bg-surface-container font-bold">3</button>
+<span class="w-12 h-12 flex items-center justify-center">...</span>
+<button class="w-12 h-12 rounded-full hover:bg-surface-container font-bold">12</button>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full border border-outline-variant text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto border-t-0 bg-slate-100 dark:bg-slate-950">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="col-span-2 md:col-span-1">
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100 block mb-6">E-kart</span>
+<p class="text-sm font-public-sans leading-relaxed text-slate-600 dark:text-slate-400 max-w-xs">Redefining digital commerce through architectural precision and premium curation.</p>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-6 text-sm uppercase tracking-wider">Company</h4>
+<div class="flex flex-col gap-4">
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors opacity-100 hover:opacity-80" href="#">About Us</a>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors opacity-100 hover:opacity-80" href="#">Sell on E-kart</a>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors opacity-100 hover:opacity-80" href="#">Terms of Sale</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-6 text-sm uppercase tracking-wider">Support</h4>
+<div class="flex flex-col gap-4">
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors opacity-100 hover:opacity-80" href="#">Customer Service</a>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors opacity-100 hover:opacity-80" href="#">Privacy Policy</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-6 text-sm uppercase tracking-wider">Newsletter</h4>
+<div class="space-y-4">
+<p class="text-xs text-slate-500 dark:text-slate-400">Join our mailing list for curated tech releases.</p>
+<div class="flex border-b border-slate-300 dark:border-slate-800 pb-2">
+<input class="bg-transparent border-none w-full text-sm focus:ring-0" placeholder="Email Address" type="email"/>
+<button class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_forward</button>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-screen-2xl mx-auto px-12 py-8 border-t border-slate-200 dark:border-slate-900">
+<p class="text-sm font-public-sans leading-relaxed text-slate-600 dark:text-slate-400 text-center md:text-left">© 2024 E-kart Architectural Commerce. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

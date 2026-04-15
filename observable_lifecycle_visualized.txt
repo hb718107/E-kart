@@ -1,0 +1,75 @@
+# J.A.R.V.I.S. Visualized Briefing: The "Diner" Protocol
+
+Boss, it sounds like the technical jargon is getting in the way of the logic. Let’s strip it down to a "Restaurant Analogy." Forget plumbing—let's talk about lunch.
+
+## 1. The Big Picture: Making an Order
+
+Imagine you are at **Stark Diner**.
+
+| Step | Technical Term | What happens in the Diner? |
+| :--- | :--- | :--- |
+| **A** | **HttpClient.get** | The **Waiter** takes your order and starts the process. |
+| **B** | **Observable** | The **Order Ticket** sitting in the kitchen. (Nothing happens until someone cooks it!) |
+| **C** | **Pipe** | The **Kitchen Counter**. It's just the surface where the food is prepared. |
+| **D** | **Map** | The **Chef**. He takes a "Raw Onion" and returns "Onion Rings." (Transformation). |
+| **E** | **Subscribe** | The **Customer** (You). You are waiting at the table. |
+
+---
+
+## 2. The Subscription Lifecycle (Next, Error, Success)
+
+This is what happens *after* you sit down at the table (call `.subscribe`). You provide three sets of instructions:
+
+### Logic A: `next` (The "Food Delivery")
+```typescript
+next: (data) => { this.products = data; }
+```
+- **Analogy**: The waiter brings a plate to your table.
+- **In Code**: This runs every time the API successfully sends a piece of data. 
+- **Can it happen more than once?**: Yes! For a stream of data (like a chat app), `next` runs for every new message. For our API, it runs once with the full list.
+
+### Logic B: `error` (The "Kitchen Disaster")
+```typescript
+error: (err) => { console.error(err); }
+```
+- **Analogy**: The waiter comes back and says, "Sir, the kitchen is on fire" (or we're out of laptops).
+- **In Code**: This runs if the server crashes (500) or the URL is wrong (404). **If an error happens, the stream stops immediately.** You don't get your food.
+
+### Logic C: `complete` (The "Success / Meal Over")
+```typescript
+complete: () => { console.log('Meal finished'); }
+```
+- **Analogy**: You've finished all your courses, and the meal is officially over.
+- **In Code**: This runs once the Observable is finished sending all data. It’s the "Final Success" signal.
+
+---
+
+## 3. Why Pipe & Map are together but separate?
+
+In `product-list.ts`, look at this flow:
+`API -> [ PIPE ( MAP -> MAP ) ] -> SUBSCRIBE`
+
+1. **The API** sends a raw crate of "Electronic Components."
+2. **The Pipe** is the workbench.
+3. **The First Map** opens the crate and only grabs the "Laptops" (res.products).
+4. **The Second Map** polishes the laptops so they look good in our UI.
+5. **The Subscription** (YOU) receives the polished laptops and displays them on the screen.
+
+---
+
+## 4. Summary Visualization (ASCII)
+```
+[ SERVER ]  --- (Raw JSON Packet) --->
+                                    |
+                                [ .PIPE ]
+                                    |
+                                [ MAP() ] --- (Transforming data...)
+                                    |
+[ COMPONENT ] <--- (Polished Arrays) --- [ .SUBSCRIBE ]
+      |
+    [NEXT] ----> "Show on UI"
+    [ERROR] ----> "Show Red Alert"
+    [COMPLETE] ----> "Stop Loading Spinner"
+```
+
+"Does that clear the HUD, Boss? Think of `next` as the arrival of data, and the `pipe/map` as the kitchen preparing it for you."

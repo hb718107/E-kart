@@ -1,29 +1,41 @@
- <!-- <body>
-    <h3>Welcome to {{title}},{{tagline}} </h3>
-  </body> -->
-<header class="header">
-  <nav class="top-nav">
-    <div class="ekart--header--nav">
-        <top-menu></top-menu>
+<header class="fixed top-0 w-full z-50 sticky bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none">
+  <div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto font-public-sans tracking-tight">
+    <!-- Brand Logo -->
+    <a class="text-2xl font-black tracking-tighter text-slate-900 dark:text-slate-50" routerLink="/">E-kart</a>
+    
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a class="text-slate-900 dark:white font-bold border-b-2 border-slate-900 dark:border-slate-50 pb-1 hover:opacity-80 transition-opacity duration-300" routerLink="/">All Products</a>
+      <a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 hover:opacity-80 transition-opacity duration-300 cursor-pointer">Deals</a>
+      <a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 hover:opacity-80 transition-opacity duration-300 cursor-pointer">Orders</a>
+      <a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 hover:opacity-80 transition-opacity duration-300 cursor-pointer" routerLink="/cart">Cart</a>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="flex-1 max-w-md mx-8">
+      <div class="relative group">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+        <input 
+          class="w-full bg-surface-container-lowest border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary-fixed outline-none transition-all duration-300" 
+          placeholder="Search for products, brands, and more..." 
+          type="text"
+          (input)="onSearchChange($event)"
+        />
       </div>
-  </nav>
-  <nav class="navbar">
-    <div class="logo">
-      <fa-icon [icon]="icons.shoe"></fa-icon>
-      Ekart
     </div>
-    <div class="right-section">
-      <main-menu></main-menu>
-      <button class="cart-btn" routerLink="/cart">
-        <div class="cart-icon-wrapper">
-          <fa-icon [icon]="icons.cart"></fa-icon>
-          <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
-        </div>
+
+    <!-- Action Icons -->
+    <div class="flex items-center gap-6">
+      <button class="flex flex-col items-center hover:opacity-80 transition-opacity duration-300 text-slate-900 dark:text-slate-100">
+        <span class="material-symbols-outlined">account_circle</span>
       </button>
-      <button class="login-btn">
-        <fa-icon [icon]="icons.user"></fa-icon>
-        Login
+      <button class="flex flex-col items-center hover:opacity-80 transition-opacity duration-300 text-slate-900 dark:text-slate-100">
+        <span class="material-symbols-outlined">favorite</span>
+      </button>
+      <button class="flex flex-col items-center hover:opacity-80 transition-opacity duration-300 text-slate-900 dark:text-slate-100 relative" routerLink="/cart">
+        <span class="material-symbols-outlined">shopping_cart</span>
+        <span class="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full" *ngIf="cartCount > 0">{{ cartCount }}</span>
       </button>
     </div>
-  </nav>
+  </div>
 </header>

@@ -1,0 +1,42 @@
+# J.A.R.V.I.S. Guide: Mastering API Communications in Angular
+
+Boss, transitioning from static data to live APIs is like moving from a pre-recorded simulation to a real-time global uplink. Here is how the systems are now communicating.
+
+## 1. The Communications Hub: HttpClient
+In Angular, we use the `HttpClient` service to send network requests. 
+- **Setup**: We provided it in `app.config.ts` using `provideHttpClient()`. This opens the ports for the application to talk to the internet.
+- **Injection**: In `product.ts`, we injected it via the constructor: `constructor(private http: HttpClient) {}`.
+
+## 2. The Stream: Observables (RxJS)
+Unlike standard JavaScript `fetch` which returns a Promise (a one-time deal), Angular's `HttpClient` returns an **Observable**.
+- **The Concept**: Think of an Observable as a "stream" of data. It doesn't do anything until someone "subscribes" to it.
+- **Why?**: Observables are more powerful. They can be cancelled, retried, and transformed easily before the data even reaches your UI.
+
+## 3. The Translator: Data Mapping
+The `DummyJSON` API doesn't know about our `ProductLister` model. It sends its own "Foreign Schema".
+- **The .pipe(map(...)) Operation**: In the service, we use the `map` operator to iterate through the API response and convert every "Foreign Product" into a "Global Marketplace Product". 
+- **Mapping logic**: 
+  - `name: p.title`
+  - `imageURL: p.thumbnail`
+  - `discountPrice: calculation based on percentage`
+
+## 4. The Bridge: Subscription in Components
+In your `ProductList` component, we changed the logic from "give me data now" to "subscribe to the feed".
+```typescript
+this.productService.getProducts().subscribe({
+  next: (data) => {
+    this.products = data; // Data arrived! UI updates automatically.
+  },
+  error: (err) => {
+    // Handle the failure (e.g., show a 'Red Alert' message)
+  }
+});
+```
+
+## 5. High-Frequency Updates: Real-time Search
+We implemented `OnChanges` in the `ProductList`.
+- Every time you type in the Omni-Header, the `searchText` @Input changes.
+- `ngOnChanges` detects this, kills the old request, and starts a fresh API call to `.../products/search?q=query`.
+- This ensures the UI always mirrors the server's latest intelligence.
+
+"Knowledge is power, Sir. Now you're not just running a shop; you're running a data-driven enterprise."

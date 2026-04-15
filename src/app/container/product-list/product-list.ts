@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from './product/product';
 import { Filter } from './filter/filter';
@@ -11,7 +11,7 @@ import { ProductService } from '../../services/product';
   templateUrl: './product-list.html',
   styleUrls: ['./product-list.css'],
 })
-export class ProductList implements OnInit {
+export class ProductList implements OnInit, OnChanges {
   selectedProduct: ProductLister;
   products: ProductLister[] = [];
   totalProducts: number = 0;
@@ -29,14 +29,28 @@ export class ProductList implements OnInit {
     this.loadProducts();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['searchText']) {
+      this.loadProducts();
+    }
+  }
+
   loadProducts() {
+    const obs = this.searchText.trim() 
+      ? this.productService.searchProducts(this.searchText)
+      : this.productService.getProducts();
 
-    this.products = this.productService.getProducts();
-
-    this.totalProducts = this.productService.getTotalProductsCount();
-
-    this.inStockProducts = this.productService.getInStockCount();
-    this.outOfStockProducts = this.productService.getOutOfStockCount();
+    obs.subscribe({
+      next: (data) => {
+        this.products = data;
+        this.totalProducts = this.products.length;
+        this.inStockProducts = this.products.filter(p => p.is_in_inventory).length;
+        this.outOfStockProducts = this.products.filter(p => !p.is_in_inventory).length;
+      },
+      error: (err) => {
+        console.error('Failed to load products', err);
+      }
+    });
   }
 
   onFilterChange(value: string) {

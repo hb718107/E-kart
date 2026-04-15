@@ -1,10 +1,82 @@
-<div class="ekart-product-container">
-    <app-search (searchtextchanged)="setSearchText($event)"></app-search>
-</div>
-<div class="prod-list">
-   <product-list [searchText]="searchText" #selectedProductList></product-list>
-   <product-details *ngIf="selectedProductList.selectedProduct" [productListComp]="productListComponent"></product-details>
-</div>
+<main class="flex-grow pt-4">
+    <!-- Hero Section -->
+    <section class="p-4 md:px-8 mb-4 md:mb-12">
+        <div class="max-w-screen-2xl mx-auto relative overflow-hidden rounded-xl h-[400px] md:h-[600px] flex items-center bg-primary-container">
+            <div class="absolute inset-0 opacity-60">
+                <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATqxsbCmI37FU1KxIGGf922GoSgE3lFoVfOTr8YsgH6o1AghYvx9ByvtMCyw4YJk4w1j1h02wTgCOsP1qLDxxaw-V_Ogp7MMFMHMXOpGiY6pzb6MB2o6NOunVsvb-7qJCxXbkekVY1qTXlYaAuLsgkDjfE0ZHfsY9TW5IyZSh4uM7B0isCKSowhWaJTtjSBcmWmdJkhBxf_wMfEC4zi5ZCUk_-OskQIJh8ixwNoriLfdABMJksX-l3kq9kAFSAFoymbIyJ5YETpk0" alt="Special Sale Items Banner"/>
+            </div>
+            <div class="relative z-10 p-8 md:px-16 max-w-2xl">
+                <span class="text-primary-fixed uppercase tracking-[0.2em] font-bold text-xs mb-4 block">Limited Collection</span>
+                <h1 class="text-4xl md:text-6xl font-black text-on-primary-fixed leading-tight mb-6">Redefining the <br/>Digital Studio.</h1>
+                <p class="text-on-primary-container text-base md:text-lg mb-8 leading-relaxed">Experience the next generation of professional electronics with exclusive launch deals up to 40% off.</p>
+                <div class="flex gap-4">
+                    <button class="bg-surface-container-lowest text-primary px-6 md:px-8 py-3 md:py-4 font-bold rounded-lg hover:bg-opacity-90 transition-all scale-95 duration-200">Shop Electronics</button>
+                    <button class="bg-transparent border-2 border-on-primary-container text-on-primary-fixed px-6 md:px-8 py-3 md:py-4 font-bold rounded-lg hover:bg-white/10 transition-all">View All Offers</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Department Shortcuts -->
+    <section class="px-8 mb-16">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Fashion -->
+                <a class="group relative aspect-[4/3] overflow-hidden rounded-xl bg-surface-container cursor-pointer">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIdJ9prXeAYpq0Yg2MK9cjEL5D22BBEOSB3njD9BN-gqFDy42crlBG8O3LJiI-9Zhi_dq2awnoYI5WAt0a9HqjlCPvfxevFWO1Nisup3UctjAw40mQqxDHvkYnucaoQK3mLtw6ZcAmbkq_P90mVPreIFFt6HizUhAJ2_Meg-hhe-S_S-L78QZUQA89ZotjqyHZ9-C37Bz1sJJ8i1lGtDbjB5As21_0u77y6XXO2lpCYznbLFf9_S8dS3pPb67op90gpm0uF1VonSI" alt="Fashion Curation"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-on-primary font-bold text-xl">Fashion</h3>
+                        <p class="text-on-primary/80 text-sm">Curation 2024</p>
+                    </div>
+                </a>
+                <!-- Electronics -->
+                <a class="group relative aspect-[4/3] overflow-hidden rounded-xl bg-surface-container cursor-pointer">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8GNXhaIeP9SfibLSCnN50oyC1U34eTkXLhdH0adwSlwykrJWpDB5_yBYS8sStSR1GPWGEttl6UTMr8Um2q-joW8-nlSkgJbfWCq4LlUDueU6VKvXqhE8fHzr-IkNT8Mx1-2_ZbY5SgZR6jehS1LC_N7uZ9USoHKPH_ZIpWklS84jlmJP-whDw_imxErSDr4rBPvEnkMHUmM4S8dhYopO6YSiD8tt41HGgKm-VmY1gzzN8iCxOK9e54c0tzqllrsnqvNCJ8eXveYY" alt="Next-gen Tech"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-on-primary font-bold text-xl">Electronics</h3>
+                        <p class="text-on-primary/80 text-sm">Next-gen Tech</p>
+                    </div>
+                </a>
+                <!-- Home -->
+                <a class="group relative aspect-[4/3] overflow-hidden rounded-xl bg-surface-container cursor-pointer">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc2R3qZ8ujl4BgzJ7Y-qAC7Fw0jiC4ywAFBKoy6oAmxp4lj0d7A5mR5q8U5f61tzFNhLKzMtqs_LcTJKXN8Dy7Gi8kzZ7IIjZDgL8sAWajR-JpoDpJDYAksQ6SsthgV8kPJT4qMG8fpHHkuFvZ_QhB63DZVb5DvEPKbIxvcIUEFqj93p1bdeHlqQuep_5KVkcnu3OLCFKUwDFtVXR18BwqIN9lh5qzjV9aS-PUR5UDwa6MOr0Mg7uoBRw7TvtJOWM-uz17fmRMdUw" alt="Home Decor"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-on-primary font-bold text-xl">Home</h3>
+                        <p class="text-on-primary/80 text-sm">Interior Accents</p>
+                    </div>
+                </a>
+                <!-- Grocery -->
+                <a class="group relative aspect-[4/3] overflow-hidden rounded-xl bg-surface-container cursor-pointer">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE0mw2JKmAV4A8FC_w418pWRc0M8hJUzrTbmQvcZDTi23u398eBS6TJETLr-Lis4V6Dn8IoQL9S1FEb8Ip77X2z73ZW3YjiG_wnCJcHAbWKcZrmQKq-V8HvclJZ4RKqx-lkqRz-1z393Hpj5_TDDCnZ3lIJpzRCe2_3dtpTeWEQB_aN0IIVmr-XZMKeI9BUvIF9CEMg0RtDzWA4_3tiE46iFoBFHq_WOfQr2szUQCHGKTTYrtOOLa17TsLs338g5BUwrm2OfijRgM" alt="Organic Grocery"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-on-primary font-bold text-xl">Grocery</h3>
+                        <p class="text-on-primary/80 text-sm">Organic Selection</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section (existing logic) -->
+    <section class="px-4 md:px-8 py-10 md:py-20 bg-surface-container-low">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-primary font-bold tracking-widest text-xs uppercase mb-2 block">Our Collection</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-on-surface">Available Products</h2>
+                </div>
+            </div>
+            <div class="prod-list">
+                <product-list [searchText]="searchText" #selectedProductList></product-list>
+                <product-details *ngIf="selectedProductList.selectedProduct" [productListComp]="productListComponent"></product-details>
+            </div>
+        </div>
+    </section>
+</main>
     <!-- <div *ngFor=" let items of somenames">
        <p>Current element of array : {{items}}</p>
     </div>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>E-kart | Lumina X1 Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-tertiary-fixed": "#2a0043", "inverse-surface": "#000d26", "on-primary-fixed-variant": "#002e52", tertiary: "#7c40a1", outline: "#64779d", "inverse-primary": "#0097fc", "on-primary": "#edf3ff", "primary-fixed-dim": "#0097fc", "surface-container": "#e0e8ff", "secondary-fixed-dim": "#a7c4ff", "on-secondary": "#eff2ff", "on-tertiary-fixed-variant": "#57187c", "surface-tint": "#005ea0", "tertiary-fixed-dim": "#ca89f0", "surface-container-highest": "#ceddff", "primary-fixed": "#47a5ff", "surface-container-low": "#ecf0ff", "surface-container-high": "#d7e2ff", "secondary-fixed": "#bdd2ff", "error-container": "#fb5151", "surface-bright": "#f5f6ff", "primary-container": "#47a5ff", "on-primary-fixed": "#000000", "on-surface-variant": "#495c80", "on-tertiary-container": "#4d0972", "surface-dim": "#c1d5ff", "inverse-on-surface": "#8a9dc5", "on-secondary-fixed": "#00336d", "outline-variant": "#9aadd6", "on-tertiary": "#fdeeff", "on-surface": "#1a2e50", "on-secondary-fixed-variant": "#004ea2", "on-primary-container": "#002442", "on-error": "#ffefee", "on-error-container": "#570008", "secondary-container": "#bdd2ff", "tertiary-container": "#d896fe", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#d896fe", secondary: "#0659b5", error: "#b31b25", "on-background": "#1a2e50", "surface-variant": "#ceddff", background: "#f5f6ff", primary: "#005ea0", surface: "#f5f6ff", "on-secondary-container": "#004591", "tertiary-dim": "#6f3394", "secondary-dim": "#004da1", "error-dim": "#9f0519", "primary-dim": "#00528c"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, fontFamily: {headline: ["Public Sans"], body: ["Public Sans"], label: ["Public Sans"], display: "Public Sans"}}}};</script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .glass-header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-header shadow-sm bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-slate-900 dark:text-slate-50">E-kart</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 hover:opacity-80 transition-opacity duration-300" href="#">All Departments</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 hover:opacity-80 transition-opacity duration-300" href="#">Deals</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-slate-100 hover:opacity-80 transition-opacity duration-300" href="#">Orders</a>
+<a class="text-slate-900 dark:text-white font-bold border-b-2 border-slate-900 dark:border-slate-50 pb-1" href="#">Cart</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100 cursor-pointer scale-95 duration-200 ease-in-out">account_circle</span>
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100 cursor-pointer scale-95 duration-200 ease-in-out">favorite</span>
+<div class="relative">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100 cursor-pointer scale-95 duration-200 ease-in-out">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary-container text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">2</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 max-w-screen-2xl mx-auto px-8">
+<!-- Product Exhibit Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+<!-- Left: Gallery Exhibit -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="bg-surface-container-lowest overflow-hidden">
+<img alt="Lumina X1 Pro" class="w-full aspect-[4/5] object-cover hover:scale-105 transition-transform duration-500" data-alt="Close-up professional studio shot of a high-end matte black mirrorless camera with premium lens, soft dramatic side lighting against a neutral grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHnZmR_uoadnL2HIsSfltL9Cv_h0InL0VYDWqB4Q8xr1940CCsHh5tAwdsPkQAHUJvNXOsNY-gS5pYuSb4t28O_KBKlErInHZTI4sqx5Q7J0ng_xqJgM7l4SlBeozeBgYkrS0oXqCbakD_FxNvmCBrYCj5baCI5hsB8TBaRwT9Ohly__Umu2IiQ0uGgmRL6goUWnhBIiGcE7-039IP0PG0JiATY5vGfgOZ7sTb4eywq6uYuZnrCXNrKIImwjEOLf0pU7OIF1JZX_E"/>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest aspect-square cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Angle 1" class="w-full h-full object-cover" data-alt="Side profile view of a professional camera showing dial details and textured grip in crisp focus with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYIDJ-mOkqP7vuEZysCQoW0pVvxdfSmNvAdFlKIkLQdggsJ_-oNHnsYU4x6XMnWRjvD1CKzNKMDC5n2qDJidpB4lAPj-A1WmVqiqj68dqdC3xU1pstafDANCEmM_c4dc-fjT0b2hmbOFJwU2_doAxq6Bkop4cudXtwkscuEG7EuTOR-RLUm1oGVoZS9MhOudPZe3Hdm7pyHxsqmhevfuWD3Y29ktobAKLfQPRWHpYoeS8_WvZJQvh8StjH83X2VGTK2DaQeKH5CYs"/>
+</div>
+<div class="bg-surface-container-lowest aspect-square cursor-pointer hover:opacity-80 transition-opacity border-2 border-primary">
+<img alt="Angle 2" class="w-full h-full object-cover" data-alt="Top down view of a high-end camera showing various control buttons and the electronic viewfinder in clean studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADSwbLWNxNTqgJIgZkkgC6nS6e-0fFDWB_BZB2UzRgd4EYZIkVWPTbBVHgXEfCFWwFMCtIzjBWS_nrpdSzLkk0iEyPm0uAaHm4mziw5ujLQKdOw9WLdFqhSqk2XcbewOcz3HXotEv7gk5XnkN6NBBHMbD_Zx-QgoRBVBxI-wntEYL2s82hL6nD-nbzsfcZY73LrW-bzkXK86m5kJusMj_gjk7OZSl_FoM9BkGLpbuuyGXRyhYt8Nwh_BmWA-4FBFn_Wen_8-8Z4dc"/>
+</div>
+<div class="bg-surface-container-lowest aspect-square cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Angle 3" class="w-full h-full object-cover" data-alt="Rear view of a professional mirrorless camera highlighting the large articulated LCD screen and ergonomic button layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB38mjqer-Wrx0mSdg78x8-Jv4Eg3-rJFQm-WXdFNcrFlwtn47AkkNIAzdjv3v_J-EOWsKVDZ06fZZGouAVazI0tjwmlImyEMW3xh2WhHGnEtOkFbiMHzldhdbgIDuswlddmE6Wact1oJr8ShkWzrrmvARn2yY-BT8Fecp6geMmzvaTvcmPB7htNZIZZurhXBb5v_qM0Olju0KyK7Jgr8TW7Wdxbj9Bjn3568KjuOMbXIEMrDBn20uuql7hIjxhcPTIJnTV9Y2w4Hk"/>
+</div>
+<div class="bg-surface-container-lowest aspect-square cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-center">
+<span class="text-label-md font-bold tracking-widest text-primary">+4 MORE</span>
+</div>
+</div>
+</div>
+<!-- Right: Product Narrative -->
+<div class="lg:col-span-5 flex flex-col">
+<nav class="flex gap-2 mb-8 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Photography</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Professional Bodies</a>
+</nav>
+<h1 class="text-[3.5rem] leading-[1.1] font-headline font-bold tracking-tighter text-on-surface mb-4">Lumina X1 Pro</h1>
+<div class="flex items-center gap-4 mb-8">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+</div>
+<span class="text-sm font-medium text-on-surface-variant">4.8 (124 Verified Reviews)</span>
+</div>
+<div class="text-[2rem] font-bold text-primary mb-8 tracking-tight">$3,499.00</div>
+<p class="text-body-md text-on-surface-variant leading-relaxed mb-12 max-w-md">
+                    Engineered for the uncompromising professional. The Lumina X1 Pro combines a revolutionary 61MP full-frame sensor with an architectural body design, redefining what it means to capture light.
+                </p>
+<!-- Actions -->
+<div class="flex flex-col gap-4 mb-16">
+<button class="w-full py-5 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-primary/10">
+                        Add to Cart
+                    </button>
+<button class="w-full py-5 bg-surface-container-highest text-primary font-bold rounded-lg hover:bg-surface-container-high transition-colors">
+                        Buy Now
+                    </button>
+</div>
+<!-- Bento-Style Specs Card -->
+<div class="bg-surface-container-low rounded-xl p-8">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-tertiary-container mb-6">Technical Architecture</h3>
+<div class="grid grid-cols-2 gap-y-8 gap-x-4">
+<div>
+<div class="text-xs text-on-surface-variant mb-1">Sensor</div>
+<div class="font-bold text-primary">61.2MP CMOS</div>
+</div>
+<div>
+<div class="text-xs text-on-surface-variant mb-1">ISO Range</div>
+<div class="font-bold text-primary">50 - 102,400</div>
+</div>
+<div>
+<div class="text-xs text-on-surface-variant mb-1">AF Points</div>
+<div class="font-bold text-primary">759 Phase-Detect</div>
+</div>
+<div>
+<div class="text-xs text-on-surface-variant mb-1">Video</div>
+<div class="font-bold text-primary">8K 30p / 4K 120p</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Frequently Bought Together: Horizontal Curation -->
+<section class="mb-24">
+<h2 class="text-headline-lg font-bold tracking-tight mb-12">The Professional Bundle</h2>
+<div class="bg-surface-container-low p-10 rounded-xl flex flex-col md:flex-row items-center gap-12">
+<div class="flex items-center gap-8">
+<div class="w-32 h-32 bg-white rounded-lg p-2 shadow-sm">
+<img alt="Lumina X1" class="w-full h-full object-contain" data-alt="Minimalist camera body icon showing professional lens mount and grip." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxf8EUpSbj1_Vq0LLiNCYbP2dO9YmQ7Inq2rOCuIzw97pEk14wjAl8UX5kz3qvOiWcG5f5lfXHkE4koTPap5nxpZitJrhTOEwieFqU7Inb0zZlKxAeoJOnrlLlU7JX8cGKuBO42pnYicbA5QeGbaCAd5X-JpZgBE_2n7JJvNIUCEOn4RSl2Ae94138zOGkvE4S2ZMgWrT40QAu7oC-9X78czHi3eU1CFWFp8xOIyBa2YcS-bOBF9-jaCqUYJEgtwfq6dPr3coBSMc"/>
+</div>
+<span class="material-symbols-outlined text-outline-variant">add</span>
+<div class="w-32 h-32 bg-white rounded-lg p-2 shadow-sm">
+<img alt="Lens" class="w-full h-full object-contain" data-alt="High-end 24-70mm f/2.8 professional camera lens with glass elements reflecting soft light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUZAaHSnjC2W_PzAbSLRaie2PKE6Mr8flH_HqZSNqvBNfRSKUE8rAsqndh_5KASK1XBYiINe08MLuxn7udk7L-l5psF8wdg8Plaz3y0AVXdgJGGg9QDogVQoA9FQ4aYvuOBDR50arVRQTAV0va1imMYRu5jARTl4o2OYTvgde_l0AFchQ9i3mgPoQ9ULKHzM1bYdrAZTaKbA-7qmXdG54CiZWMOJv5_4CGE2uT_pOwlrPqVNJKitJ68NidQe0o9P78SJ-NWKyQFNc"/>
+</div>
+<span class="material-symbols-outlined text-outline-variant">add</span>
+<div class="w-32 h-32 bg-white rounded-lg p-2 shadow-sm">
+<img alt="Battery" class="w-full h-full object-contain" data-alt="High capacity professional camera battery and dual charger on a clean white surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHx4dfPWHWrFsDgb3SQN0g4H4uMF7ynfc0Rd_vBb1C1ZXEdeh29Iu3jqBKt0pU1PcfexCxIjk-MT3AZYRQyY1XUUfw7vBqxMSTitbvNnWD2IGG8CS7w25je4DbsSkBPkE7U0jKwLw-8w4HbunENBIvadopvmqUh8rVC5HoS_rNzUe0QakecqEEU-8fKbk45sWLDXcT4gfzzKJPnfQbzDu492BpKA2CqOwD2MNiv7FE-bF_YnjKWjUNXOCajRJrEf19fLkgPwYr0S4"/>
+</div>
+</div>
+<div class="flex-1 md:border-l md:border-outline-variant/20 md:pl-12 text-center md:text-left">
+<div class="text-on-surface-variant mb-2">Total Bundle Price</div>
+<div class="text-3xl font-bold text-primary mb-6">$4,295.00 <span class="text-lg text-error line-through ml-2 font-normal opacity-50">$4,650.00</span></div>
+<button class="px-8 py-3 bg-primary-container text-white font-bold rounded-lg hover:bg-primary transition-colors">
+                        Add Bundle to Cart
+                    </button>
+</div>
+</div>
+</section>
+<!-- Detailed Specifications Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-surface-container-high pt-24">
+<div>
+<h4 class="text-lg font-bold mb-6">Unrivaled Precision</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">The Lumina X1 Pro features an advanced AI processing unit specifically dedicated to subject recognition and tracking, ensuring every shot is in focus, no matter the speed.</p>
+</div>
+<div>
+<h4 class="text-lg font-bold mb-6">Thermal Management</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Our proprietary heat dissipation structure allows for unlimited 4K recording and up to 30 minutes of continuous 8K capture without throttling.</p>
+</div>
+<div>
+<h4 class="text-lg font-bold mb-6">Built for the Wild</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Fully weather-sealed magnesium alloy chassis provides the durability needed for extreme environments, from Arctic cold to tropical humidity.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-950 w-full mt-auto border-t-0">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="flex flex-col gap-4">
+<div class="text-lg font-bold text-slate-900 dark:text-slate-100">E-kart</div>
+<p class="text-sm font-public-sans leading-relaxed text-slate-600 dark:text-slate-400">Architectural Commerce for the discerning collector.</p>
+</div>
+<div class="flex flex-col gap-3">
+<div class="text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100 mb-2">Company</div>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors" href="#">About Us</a>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors" href="#">Sell on E-kart</a>
+</div>
+<div class="flex flex-col gap-3">
+<div class="text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100 mb-2">Support</div>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors" href="#">Customer Service</a>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors" href="#">Terms of Sale</a>
+</div>
+<div class="flex flex-col gap-3">
+<div class="text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100 mb-2">Privacy</div>
+<a class="text-sm font-public-sans leading-relaxed text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors underline text-slate-900 dark:text-slate-100" href="#">Privacy Policy</a>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-slate-200 dark:border-slate-800 max-w-screen-2xl mx-auto text-center text-xs text-slate-500">
+            © 2024 E-kart Architectural Commerce. All rights reserved.
+        </div>
+</footer>
+</body></html>

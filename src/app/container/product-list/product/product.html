@@ -1,20 +1,71 @@
-<div class="ekart--product--item">
-    <div class="ekart-wishlist-sale-container">
-        <div class="ekart--add--to--wishlist">
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
+<div class="bg-surface-container-lowest p-6 rounded-xl group transition-all duration-300 h-full flex flex-col shadow-sm hover:shadow-md">
+    <div class="relative mb-6 overflow-hidden rounded-lg aspect-square bg-white">
+        <!-- Product Image -->
+        <img 
+            [src]="product.imageURL" 
+            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 p-4" 
+            [alt]="product.name"
+        >
+        
+        <!-- Sale Badge -->
+        <div 
+            class="absolute top-4 left-4 bg-error text-on-error px-3 py-1 text-xs font-bold rounded-full shadow-sm"
+            *ngIf="product.discountPrice"
+        >
+            -{{(100 -(product.discountPrice / product.price * 100)).toFixed()}}%
         </div>
-        <div class="ekart-on-sale-tag" *ngIf="product.discountPrice">{{(100 -(product.discountPrice / product.price * 100)).toFixed()}}% OFF</div>
-      </div>
-      <div class="ekart--product--image">
-          <img [src]="product.imageURL" class="ekart--product--image" alt="{{ product.name }}">
-      </div>
-      <div class="ekart--add--to--price">
-          Rs. {{product.price}}
-      </div>
-      <div class="ekart--product--name">{{product.name}}</div>
-      <div class="ekart--product--category">{{product.gender}} . {{product.category}} . {{product.brand}}</div>
-      <div class="ekart--product--available-colors">{{product.color.length}} Colors . Best Seller</div>
-      <div class="ekart--product--in--stock" [ngStyle]="{fontWeight:'bold',color: product.is_in_inventory ? 'Green' : 'Red' }">
-        {{product.is_in_inventory?'Available' : 'Not Available'}}
+
+        <!-- Inventory Badge -->
+        <div 
+            class="absolute bottom-4 right-4 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm"
+            [ngClass]="product.is_in_inventory ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
+        >
+            {{product.is_in_inventory ? 'IN STOCK' : 'OUT OF STOCK'}}
+        </div>
     </div>
+
+    <!-- Info Sections -->
+    <div class="flex-grow">
+        <div class="text-[10px] text-outline font-bold tracking-widest uppercase mb-1">
+            {{product.brand}} | {{product.category}}
+        </div>
+        <h3 class="font-bold text-lg mb-2 text-on-surface line-clamp-1 hover:text-primary transition-colors cursor-pointer">
+            {{product.name}}
+        </h3>
+
+        <!-- Pricing -->
+        <div class="flex items-center gap-2 mb-4">
+            <span class="text-2xl font-black text-primary">
+                {{ (product.discountPrice || product.price) | currency:'USD' }}
+            </span>
+            <span 
+                class="text-outline line-through text-xs" 
+                *ngIf="product.discountPrice"
+            >
+                {{ product.price | currency:'USD' }}
+            </span>
+        </div>
+
+        <!-- Inventory Progress (Based on items_left vs fixed constant for visual) -->
+        <div class="space-y-2 mb-4" *ngIf="product.is_in_inventory">
+            <div class="flex justify-between text-[10px] font-bold uppercase">
+                <span class="text-outline">Items Left</span>
+                <span class="text-primary">{{product.items_left}}</span>
+            </div>
+            <div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+                <div 
+                    class="h-full bg-primary transition-all duration-500" 
+                    [style.width.%]="(product.items_left / 10) * 100"
+                ></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Button -->
+    <button 
+        class="w-full mt-auto py-3 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-all active:scale-[0.98] disabled:bg-slate-300 disabled:cursor-not-allowed"
+        [disabled]="!product.is_in_inventory"
+    >
+        {{ product.is_in_inventory ? 'Add to Cart' : 'Sold Out' }}
+    </button>
 </div>

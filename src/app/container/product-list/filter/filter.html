@@ -1,16 +1,39 @@
-<div class="filter-container">
-    <input type="radio" name="filter" value="all" 
-    [(ngModel)] ="selectedFilterRadioButton" 
-    (change)="onselectedFilterRadioButtonChange()"/>
-    <span>All{{'('+ all + ')'}}</span>
+<div class="flex flex-wrap gap-4 mb-8 p-4 bg-white rounded-xl shadow-sm border border-surface-container-high items-center">
+    <span class="text-xs font-bold text-outline uppercase tracking-wider mr-2">Filter By:</span>
+    
+    <!-- All -->
+    <label class="relative flex items-center cursor-pointer group">
+        <input type="radio" name="filter" value="all" class="peer sr-only"
+            [(ngModel)]="selectedFilterRadioButton" 
+            (change)="onselectedFilterRadioButtonChange()"/>
+        <div class="px-5 py-2 rounded-full border border-surface-container-high bg-surface-container-low text-sm font-medium transition-all
+            peer-checked:bg-primary peer-checked:text-on-primary peer-checked:border-primary peer-checked:shadow-sm
+            group-hover:border-primary group-hover:text-primary peer-checked:group-hover:text-on-primary">
+            All <span class="ml-1 opacity-70">({{all}})</span>
+        </div>
+    </label>
 
-    <input type="radio" name="filter" value="true" 
-    [(ngModel)] ="selectedFilterRadioButton" 
-    (change)="onselectedFilterRadioButtonChange()"/>
-    <span>Available{{'('+ inStock + ')'}}</span>
+    <!-- Available -->
+    <label class="relative flex items-center cursor-pointer group">
+        <input type="radio" name="filter" value="true" class="peer sr-only"
+            [(ngModel)]="selectedFilterRadioButton" 
+            (change)="onselectedFilterRadioButtonChange()"/>
+        <div class="px-5 py-2 rounded-full border border-surface-container-high bg-surface-container-low text-sm font-medium transition-all
+            peer-checked:bg-green-600 peer-checked:text-white peer-checked:border-green-600 peer-checked:shadow-sm
+            group-hover:border-green-600 group-hover:text-green-600 peer-checked:group-hover:text-white">
+            Available <span class="ml-1 opacity-70">({{inStock}})</span>
+        </div>
+    </label>
 
-    <input type="radio" name="filter" value="false" 
-    [(ngModel)] ="selectedFilterRadioButton" 
-    (change)="onselectedFilterRadioButtonChange()"/>
-    <span>Not Available{{'('+ outOfStock + ')'}}</span>
+    <!-- Not Available -->
+    <label class="relative flex items-center cursor-pointer group">
+        <input type="radio" name="filter" value="false" class="peer sr-only"
+            [(ngModel)]="selectedFilterRadioButton" 
+            (change)="onselectedFilterRadioButtonChange()"/>
+        <div class="px-5 py-2 rounded-full border border-surface-container-high bg-surface-container-low text-sm font-medium transition-all
+            peer-checked:bg-red-600 peer-checked:text-white peer-checked:border-red-600 peer-checked:shadow-sm
+            group-hover:border-red-600 group-hover:text-red-600 peer-checked:group-hover:text-white">
+            Not Available <span class="ml-1 opacity-70">({{outOfStock}})</span>
+        </div>
+    </label>
 </div>
