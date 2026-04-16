@@ -7,15 +7,7 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     <div *ngFor="let prod of products" (click)="selectedProduct = prod" class="h-full">
-        <ng-container 
-            *ngIf="
-                (selectedFilterRadioButton === 'all' || 
-                prod.is_in_inventory.toString() === selectedFilterRadioButton) &&
-                (searchText === '' || 
-                prod.name.toLowerCase().includes(searchText.toLowerCase()))
-            ">
-            <app-product [product]="prod" class="h-full block"></app-product>
-        </ng-container>
+        <app-product [product]="prod" class="h-full block"></app-product>
     </div>
 </div>
 

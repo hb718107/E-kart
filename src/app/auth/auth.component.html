@@ -1,0 +1,165 @@
+<div class="min-h-screen bg-background font-public-sans flex items-center justify-center p-6 pt-24">
+    <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-outline-variant/10 shadow-2xl">
+        
+        <!-- Left: Narrative -->
+        <div class="hidden md:flex flex-col justify-center p-12 bg-primary/5 border-r border-outline-variant/10">
+            <div class="text-xs font-bold text-primary tracking-[0.3em] uppercase mb-4">User Authentication</div>
+            <h1 class="text-4xl font-black tracking-tighter text-on-surface mb-6 leading-tight">
+                Sign in to <br> <span class="text-primary">E-kart Marketplace</span>
+            </h1>
+            <p class="text-sm text-on-surface-variant font-light leading-relaxed mb-8">
+                Create your account to unlock easy checkouts, track your orders, and manage your profile settings. 
+            </p>
+            <div class="space-y-4">
+                <div class="flex items-center gap-3 text-xs font-bold text-on-surface">
+                    <span class="material-symbols-outlined text-primary">verified_user</span>
+                    Industrial Encryption
+                </div>
+                <div class="flex items-center gap-3 text-xs font-bold text-on-surface">
+                    <span class="material-symbols-outlined text-primary">analytics</span>
+                    Real-time Deployment Tracking
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Auth Form / Profile Completion -->
+        <div class="p-8 md:p-12 flex flex-col justify-center">
+            
+            <!-- CASE 1: PROFILE COMPLETION REQUIRED (Google or Email) -->
+            <div *ngIf="isLoggedIn && isProfileIncomplete" class="space-y-6">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-black tracking-tighter text-on-surface">Complete Your Profile</h2>
+                    <p class="text-xs text-on-surface-variant opacity-60 italic">Shipping information (Phone & Address) is required for delivery.</p>
+                </div>
+
+                <!-- Error Feedback -->
+                <div *ngIf="error" class="mb-6 p-4 bg-error/10 border border-error/20 rounded-lg text-error text-[11px] font-bold">
+                    {{ error }}
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-50 mb-1 block">Account Email (Locked)</label>
+                        <input 
+                            [value]="email" readonly
+                            class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm text-on-surface-variant/50 outline-none cursor-not-allowed" 
+                        />
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-primary mb-1 block">Phone Number</label>
+                        <input 
+                            [(ngModel)]="phone" name="phone"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" 
+                            placeholder="+1 (555) 000-0000" type="tel" required
+                        />
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-primary mb-1 block">Shipping Address</label>
+                        <textarea 
+                            [(ngModel)]="address" name="address"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all min-h-[100px]" 
+                            placeholder="Complete street address, suite, city, and zip..." required
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-50 mb-1 block">Billing Protocol (Optional)</label>
+                        <input 
+                            [(ngModel)]="billingInfo" name="billingInfo"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" 
+                            placeholder="Billing details..." type="text"
+                        />
+                    </div>
+                </div>
+
+                <button 
+                    (click)="completeProfile()" 
+                    [disabled]="loading"
+                    class="w-full py-4 bg-primary text-on-primary text-xs font-black rounded-lg hover:opacity-90 transition-all active:scale-[0.98] shadow-xl shadow-primary/10 uppercase tracking-widest mt-6"
+                >
+                    {{ loading ? 'Saving...' : 'Save Profile Information' }}
+                </button>
+            </div>
+
+            <!-- CASE 2: NORMAL LOGIN / SIGNUP -->
+            <div *ngIf="!isLoggedIn || !isProfileIncomplete">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-black tracking-tighter text-on-surface">Login</h2>
+                    <p class="text-xs text-on-surface-variant opacity-60">Sign in using Google or your email credentials.</p>
+                </div>
+
+                <!-- Error Feedback -->
+                <div *ngIf="error" class="mb-6 p-4 bg-error/10 border border-error/20 rounded-lg text-error text-[11px] font-bold">
+                    {{ error }}
+                </div>
+
+                <!-- Google Vector -->
+                <button 
+                    (click)="handleGoogleLogin()"
+                    [disabled]="loading"
+                    class="w-full py-3 border border-outline-variant/30 rounded-lg flex items-center justify-center gap-3 hover:bg-surface-container-low transition-all duration-300 active:scale-[0.98] disabled:opacity-50"
+                >
+                    <img src="https://www.google.com/favicon.ico" class="w-4 h-4 grayscale group-hover:grayscale-0" alt="Google">
+                    <span class="text-xs font-bold text-on-surface-variant tracking-tight">Sign in with Google</span>
+                </button>
+
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/20"></div></div>
+                    <div class="relative flex justify-center text-[10px] uppercase font-bold tracking-widest bg-white dark:bg-slate-900 px-4 text-on-surface-variant opacity-40">Or Use Credentials</div>
+                </div>
+
+                <!-- Email/Password Form -->
+                <form (submit)="handleSubmit()" class="space-y-4">
+                    <div>
+                        <input 
+                            [(ngModel)]="email" name="email"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" 
+                            placeholder="Email Address" type="email" required
+                        />
+                    </div>
+                    <div *ngIf="isLoginMode">
+                        <input 
+                            [(ngModel)]="password" name="password"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" 
+                            placeholder="Account Password" type="password" required
+                        />
+                    </div>
+
+                    <!-- Signup Extras (Only shown in Signup mode) -->
+                    <div *ngIf="!isLoginMode" class="space-y-4 pt-4 border-t border-outline-variant/10">
+                        <input 
+                            [(ngModel)]="password" name="password"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" 
+                            placeholder="Create Password" type="password" required
+                        />
+                        <div class="text-[10px] font-bold uppercase tracking-widest text-primary opacity-70">Optional Profile Information</div>
+                        <input 
+                            [(ngModel)]="phone" name="phone"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" 
+                            placeholder="Phone Number" type="tel"
+                        />
+                        <textarea 
+                            [(ngModel)]="address" name="address"
+                            class="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all min-h-[80px]" 
+                            placeholder="Full Shipping Address"
+                        ></textarea>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        [disabled]="loading"
+                        class="w-full py-4 bg-primary text-on-primary text-xs font-black rounded-lg hover:opacity-90 transition-all active:scale-[0.98] shadow-xl shadow-primary/10 uppercase tracking-widest mt-6 disabled:opacity-50"
+                    >
+                        {{ loading ? 'Signing in...' : (isLoginMode ? 'Login' : 'Create Account') }}
+                    </button>
+                </form>
+
+                <div class="mt-8 text-center pt-6 border-t border-outline-variant/10">
+                    <button (click)="toggleMode()" class="text-[11px] font-bold text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest">
+                        {{ isLoginMode ? 'New User? Create Account' : 'Already have an account? Login' }}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

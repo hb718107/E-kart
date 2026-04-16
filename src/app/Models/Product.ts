@@ -5,7 +5,7 @@ description: string;
 brand: string;
 gender: string;
 category: string;
-size: number[];
+size: (number | string)[];
 color: string[];
 price: number;
 discountPrice?:number;

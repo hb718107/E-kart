@@ -1,70 +1,113 @@
-<div class="ekart-product-detail-container">
-  <div class="ekart-product-detail-header">
-    <div class="header-title">Product Details</div>
-    <div class="ekart-product-detail-close" (click)="closeProductDetail()">
-      <fa-icon [icon]="icons.close"></fa-icon>
+<!-- Slide-out Sidebar -->
+<div class="ekart-product-detail-container bg-background">
+  <!-- Architectural Header -->
+  <div class="flex justify-between items-center px-6 py-5 border-b border-outline-variant/20 bg-white/80 backdrop-blur-md sticky top-0 z-20">
+    <div class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant">Product Narrative</div>
+    <div class="ekart-product-detail-close cursor-pointer p-2 hover:bg-surface-container-low rounded-full transition-colors flex items-center justify-center" (click)="closeProductDetail()">
+      <span class="material-symbols-outlined text-on-surface">close</span>
     </div>
   </div>
 
-  <div class="ekart-product-detail-body scroll">
-    <div class="ekart-product-detail-image-container">
-      <img [src]="product.imageURL" class="ekart-product-detail-image" alt="{{ product.name }}" />
+  <!-- Scrollable Product Body -->
+  <div class="ekart-product-detail-body scroll flex-1 overflow-y-auto p-4 space-y-6">
+    
+    <!-- Hero Gallery Section -->
+    <div class="bg-white rounded-lg overflow-hidden border border-outline-variant/10 shadow-sm max-h-[300px] flex items-center justify-center">
+      <img 
+        [src]="product.imageURL" 
+        class="max-h-full object-contain p-3 hover:scale-105 transition-transform duration-500" 
+        alt="{{ product.name }}"
+        title="{{ product.name }}"
+      />
     </div>
 
-    <div class="ekart-product-detail-info">
-      <div class="product-meta">
-        <span class="badge">{{ product.gender }}</span>
-        <span class="badge">{{ product.brand }}</span>
-        <span class="badge">{{ product.category }}</span>
+    <!-- Core Info Section -->
+    <div class="space-y-4">
+      <div class="flex flex-wrap gap-1.5">
+        <span class="px-2 py-0.5 bg-surface-container-highest text-primary text-[8px] font-bold uppercase tracking-wider rounded-sm" *ngIf="product.gender !== 'UNISEX'">{{ product.gender }}</span>
+        <span class="px-2 py-0.5 bg-surface-container text-primary text-[8px] font-bold uppercase tracking-wider rounded-sm">{{ product.brand }}</span>
+        <span class="px-2 py-0.5 bg-surface-container-low text-primary text-[8px] font-bold uppercase tracking-wider rounded-sm">{{ product.category }}</span>
       </div>
 
-      <h2 class="product-name">{{ product.name }}</h2>
+      <h1 class="text-xl font-headline font-bold tracking-tighter text-on-surface leading-tight">{{ product.name }}</h1>
 
-      <p class="product-description">{{ product.description }}</p>
+      <p class="text-[11px] text-on-surface-variant leading-relaxed font-light line-clamp-3">
+        {{ product.description }}
+      </p>
 
-      <div class="product-price-container">
-        <span class="price-label">Price:</span>
-        <span class="original-price" *ngIf="product.discountPrice"
-          ><s>Rs. {{ product.price }}</s></span
-        >
-        <span class="current-price"
-          >Rs. {{ product.discountPrice ? product.discountPrice : product.price }}</span
-        >
-        <span class="tax-note">(Inclusive of all taxes)</span>
+      <!-- Pricing Logic -->
+      <div class="p-4 bg-surface-container-low rounded-lg flex items-baseline gap-3 border border-outline-variant/10">
+        <div class="text-xl font-bold text-primary tracking-tight">
+          Rs. {{ product.discountPrice ? product.discountPrice : product.price }}
+        </div>
+        <div class="text-[10px] text-error line-through opacity-40 font-medium" *ngIf="product.discountPrice">
+          Rs. {{ product.price }}
+        </div>
+        <div class="ml-auto text-[8px] uppercase font-bold tracking-widest text-on-surface-variant opacity-60">incl. taxes</div>
       </div>
 
-      <div class="product-options">
-        <div class="option-group">
-          <h4>Available Sizes</h4>
-          <div class="size-options">
-            <span
+      <!-- Dynamic Configuration Options -->
+      <div class="space-y-6 pt-2">
+        <!-- Size Selection (Conditional) -->
+        <div class="option-group" *ngIf="product.size && product.size.length > 0">
+          <h4 class="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant mb-3 opacity-70">Architectural Fit</h4>
+          <div class="flex flex-wrap gap-2">
+            <button
               *ngFor="let size of product.size"
-              class="size-badge"
-              [ngClass]="{'active': selectedSize === size}"
+              class="w-8 h-8 flex items-center justify-center border font-medium text-[10px] transition-all duration-200 rounded-sm"
+              [ngClass]="{
+                'border-primary bg-primary text-white shadow-lg shadow-primary/20': selectedSize === size,
+                'border-outline-variant/30 text-on-surface-variant hover:border-primary/50': selectedSize !== size
+              }"
               (click)="selectedSize = size"
-            >{{ size }}</span>
+            >{{ size }}</button>
           </div>
         </div>
 
-        <div class="option-group">
-          <h4>Available Colors</h4>
-          <div class="color-options">
-            <span
+        <!-- Color Selection (Conditional) -->
+        <div class="option-group" *ngIf="product.color && product.color.length > 0">
+          <h4 class="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant mb-3 opacity-70">Select Color</h4>
+          <div class="flex flex-wrap gap-3">
+            <div
               *ngFor="let color of product.color"
-              class="color-circle"
-              [style.background-color]="color"
-              [ngClass]="{'active-color': selectedColor === color}"
+              class="group relative"
               (click)="selectedColor = color"
+              title="{{ color }}"
             >
-            </span>
+              <div 
+                [style.background-color]="color === 'Default' ? '#cbd5e1' : color"
+                class="w-6 h-6 rounded-full border cursor-pointer transition-all duration-300"
+                [ngClass]="{
+                  'scale-125 border-primary ring-2 ring-primary/10 shadow-sm': selectedColor === color,
+                  'border-white shadow-sm ring-0': selectedColor !== color
+                }"
+              ></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="ekart-product-detail-footer">
-    <button class="btn-add-to-cart" (click)="addToCart()"><fa-icon [icon]="icons.buy"></fa-icon> Add to Cart</button>
+  <!-- Actions Footer -->
+  <div class="p-4 border-t border-outline-variant/20 bg-white/80 backdrop-blur-md sticky bottom-0 space-y-2">
+    <button 
+      class="w-full py-3.5 bg-primary text-white text-[10px] font-bold rounded-lg hover:bg-primary-dim transition-all active:scale-[0.98] shadow-lg shadow-primary/10 flex items-center justify-center gap-2 uppercase tracking-[0.1em]"
+      (click)="addToCart()"
+    >
+      <span class="material-symbols-outlined text-sm">shopping_bag</span>
+      Add to Cart
+    </button>
+    
+    <button 
+      class="w-full py-3.5 bg-surface-container-highest text-primary text-[10px] font-bold rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-center gap-2 uppercase tracking-[0.1em]"
+      (click)="navigateToFullView()"
+    >
+      <span class="material-symbols-outlined text-sm">visibility</span>
+      View Product
+    </button>
   </div>
 </div>
+
+<!-- Backdrop Portal -->
 <div class="overlay" (click)="closeProductDetail()"></div>

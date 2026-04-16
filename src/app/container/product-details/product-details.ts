@@ -5,6 +5,7 @@ import { ProductList } from '../product-list/product-list';
 import { CommonModule } from '@angular/common';
 import { faCartShopping, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from '../../services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'product-details',
@@ -24,7 +25,10 @@ export class ProductDetails {
     close: faTimes
   };
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.product = this.productListComp.selectedProduct;
@@ -41,13 +45,27 @@ export class ProductDetails {
     this.productListComp.selectedProduct = undefined;
   }
 
+  navigateToFullView() {
+    const productId = this.product.id;
+    this.closeProductDetail(); // Ensure sidebar closes
+    this.router.navigate(['/product', productId]);
+  }
+
   addToCart() {
-    if (!this.selectedSize || !this.selectedColor) {
-      alert('Please select both a size and a color before adding to cart.');
+    const hasSizes = this.product.size && this.product.size.length > 0;
+    const hasColors = this.product.color && this.product.color.length > 0;
+
+    if (hasSizes && !this.selectedSize) {
+      alert('Please select a size before adding to cart.');
+      return;
+    }
+
+    if (hasColors && !this.selectedColor) {
+      alert('Please select a color before adding to cart.');
       return;
     }
     
-    this.cartService.addToCart(this.product, this.selectedSize, this.selectedColor, 1);
-    this.closeProductDetail(); // Optional: close detail view after adding
+    this.cartService.addToCart(this.product, this.selectedSize || 'N/A', this.selectedColor || 'N/A', 1);
+    this.closeProductDetail();
   }
 }

@@ -1,0 +1,132 @@
+================================================================================
+ARCHITECTURAL MANUAL: RXJS DEBOUNCE PROTOCOLS
+================================================================================
+
+SUBJECT: Understanding the "Search Debounce" Gate in E-kart
+LOCATION: src/app/services/search.service.ts
+PROTOCOL: RxJS debounceTime(5000)
+
+--------------------------------------------------------------------------------
+1. THE CORE CONCEPT: THE ELEVATOR ANALOGY
+--------------------------------------------------------------------------------
+Imagine an elevator in Stark Tower. If 10 people arrive at the same time and 
+each presses the button one after another, the elevator doesn't try to move 
+every time a biological finger hits the sensor. 
+
+Instead, it waits for a pause. It says: "I'll wait for a 2-second silence. 
+If no one else presses the button in those 2 seconds, then I'll move."
+
+Every time someone presses the button, the timer resets.
+
+In programming, this is "Debouncing."
+
+--------------------------------------------------------------------------------
+2. THE IMPLEMENTATION IN OUR GRID
+--------------------------------------------------------------------------------
+In our project, we use this to protect the API from being thrashed by every 
+single keystroke.
+
+Look at the `SearchService` architecture:
+
+```typescript
+private searchBufferSubject = new Subject<string>();
+
+constructor() {
+  this.searchBufferSubject.pipe(
+    debounceTime(5000),    // THE GATE: Wait for 5 seconds of silence
+    distinctUntilChanged() // THE FILTER: Don't pulse if the value hasn't changed
+  ).subscribe(text => {
+    this.searchTextSubject.next(text); // AUTHORIZE: Send to the app
+  });
+}
+```
+
+--------------------------------------------------------------------------------
+3. HOW THE SIGNAL FLOWS
+--------------------------------------------------------------------------------
+A. THE INPUT: 
+   As you type "Asus", the `HeaderComponent` sends 4 pulses to the 
+   `searchBufferSubject`:
+   Pulse 1: "A"
+   Pulse 2: "As"
+   Pulse 3: "Asu"
+   Pulse 4: "Asus"
+
+B. THE DELAY: 
+   Because of `debounceTime(5000)`, the first 3 pulses are effectively 
+   terminated. The timer resets on every keystroke. 
+
+C. THE AUTHORIZATION:
+   Only after you stop typing "Asus" and 5 seconds pass does the system 
+   authorize the 4th pulse to reach the `ProductList` and call the API.
+
+--------------------------------------------------------------------------------
+4. THE "IMMEDIATE PULSE" (ENTER KEY OVERRIDE)
+--------------------------------------------------------------------------------
+Boss, sometimes you need results immediately. We’ve installed an override 
+vector for that:
+
+```typescript
+setSearchTextImmediate(text: string) {
+  this.searchTextSubject.next(text); // BYPASS: No timer, straight to the vault
+}
+```
+
+By hitting ENTER in the `HeaderComponent`, we bypass the `searchBufferSubject` 
+entirely and hit the main `searchTextSubject` directly. The API triggers 
+instantly.
+
+--------------------------------------------------------------------------------
+5. WHY WE DO THIS
+--------------------------------------------------------------------------------
+1. NETWORK CONSERVATION: We save thousands of unnecessary API requests.
+2. SYSTEM STABILITY: Prevents the UI from flickering multiple times while typing.
+3. API PROTECTION: Prevents our backend (Supabase/DummyJSON) from flagging the 
+   Pilot's IP for spamming requests.
+
+================================================================================
+THE OPERATIONAL FLOW GRID: STEP-BY-STEP SIGNAL PATH
+================================================================================
+
+Boss, here is the complete synchronized path of a search signal from your 
+fingertips to the API:
+
+STAGE 1: THE INITIATION (HEADER)
+--------------------------------
+- File: [src/app/header/header.component.html]
+- Action: You type "Laptop" or hit ENTER.
+- Trigger: (input) calls `onSearchChange()` or (keyup.enter) calls `onSearchEnter()`.
+- Signal: The `HeaderComponent` pushes the text to the `SearchService`.
+
+STAGE 2: THE BUFFER GATE (SEARCH SERVICE)
+-----------------------------------------
+- File: [src/app/services/search.service.ts]
+- Action: The `searchBufferSubject` captures the raw signal.
+- Logic: `debounceTime(5000)` waits for you to pause.
+- Output: The verified signal is pushed into `searchText$`.
+
+STAGE 3: THE BRIDGE (CONTAINER)
+-------------------------------
+- File: [src/app/container/container.ts]
+- Action: The `Container` is subscribed to `searchText$`.
+- Effect: It receives "Laptop" and updates its local `searchText` property.
+- Relay: It passes this property down to the child `ProductList` via [Input].
+
+STAGE 4: THE EXECUTION (PRODUCT LIST)
+-------------------------------------
+- File: [src/app/container/product-list/product-list.ts]
+- Trigger: `ngOnChanges()` detects the new [Input] value.
+- Protection: The `REDUNDANCY SHIELD` checks if this query is actually new.
+- Authorized Load: `loadProducts()` calls the API via `productService.searchProducts("Laptop")`.
+
+STAGE 5: THE VISUALIZATION
+--------------------------
+- File: [src/app/container/product-list/product-list.html]
+- Action: `*ngFor` iterates over the returned data.
+- Result: The "Ghost Grid" fix ensures the grid collapses cleanly to 
+  display ONLY the laptops found.
+
+================================================================================
+SIGNAL PATH LOCKED.
+"Connectivity is the soul of the machine, Sir."
+================================================================================

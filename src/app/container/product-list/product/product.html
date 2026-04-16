@@ -1,15 +1,16 @@
-<div class="bg-surface-container-lowest p-6 rounded-xl group transition-all duration-300 h-full flex flex-col shadow-sm hover:shadow-md">
-    <div class="relative mb-6 overflow-hidden rounded-lg aspect-square bg-white">
+<div class="bg-surface-container-lowest p-4 rounded-xl group transition-all duration-300 h-full flex flex-col shadow-sm hover:shadow-md">
+    <div class="relative mb-4 overflow-hidden rounded-lg aspect-square bg-white">
         <!-- Product Image -->
         <img 
             [src]="product.imageURL" 
-            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 p-4" 
-            [alt]="product.name"
+            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 p-3" 
+            alt="{{ product.name }}"
+            title="{{ product.name }}"
         >
         
         <!-- Sale Badge -->
         <div 
-            class="absolute top-4 left-4 bg-error text-on-error px-3 py-1 text-xs font-bold rounded-full shadow-sm"
+            class="absolute top-3 left-3 bg-error text-on-error px-2 py-0.5 text-[10px] font-bold rounded-full shadow-sm"
             *ngIf="product.discountPrice"
         >
             -{{(100 -(product.discountPrice / product.price * 100)).toFixed()}}%
@@ -17,7 +18,7 @@
 
         <!-- Inventory Badge -->
         <div 
-            class="absolute bottom-4 right-4 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm"
+            class="absolute bottom-3 right-3 text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-sm"
             [ngClass]="product.is_in_inventory ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
         >
             {{product.is_in_inventory ? 'IN STOCK' : 'OUT OF STOCK'}}
@@ -26,30 +27,30 @@
 
     <!-- Info Sections -->
     <div class="flex-grow">
-        <div class="text-[10px] text-outline font-bold tracking-widest uppercase mb-1">
+        <div class="text-[9px] text-outline font-bold tracking-widest uppercase mb-1 opacity-70">
             {{product.brand}} | {{product.category}}
         </div>
-        <h3 class="font-bold text-lg mb-2 text-on-surface line-clamp-1 hover:text-primary transition-colors cursor-pointer">
+        <h3 class="font-bold text-base mb-1 text-on-surface line-clamp-1 hover:text-primary transition-colors cursor-pointer leading-tight">
             {{product.name}}
         </h3>
 
         <!-- Pricing -->
-        <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl font-black text-primary">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl font-black text-primary tracking-tighter">
                 {{ (product.discountPrice || product.price) | currency:'USD' }}
             </span>
             <span 
-                class="text-outline line-through text-xs" 
+                class="text-outline line-through text-[10px] opacity-60" 
                 *ngIf="product.discountPrice"
             >
                 {{ product.price | currency:'USD' }}
             </span>
         </div>
 
-        <!-- Inventory Progress (Based on items_left vs fixed constant for visual) -->
-        <div class="space-y-2 mb-4" *ngIf="product.is_in_inventory">
-            <div class="flex justify-between text-[10px] font-bold uppercase">
-                <span class="text-outline">Items Left</span>
+        <!-- Inventory Progress -->
+        <div class="space-y-1.5 mb-3" *ngIf="product.is_in_inventory">
+            <div class="flex justify-between text-[9px] font-bold uppercase opacity-60">
+                <span>Items Left</span>
                 <span class="text-primary">{{product.items_left}}</span>
             </div>
             <div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
@@ -63,7 +64,7 @@
 
     <!-- Action Button -->
     <button 
-        class="w-full mt-auto py-3 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-all active:scale-[0.98] disabled:bg-slate-300 disabled:cursor-not-allowed"
+        class="w-full mt-auto py-2.5 bg-primary text-on-primary text-xs font-bold rounded-lg hover:opacity-90 transition-all active:scale-[0.98] disabled:bg-slate-300 disabled:cursor-not-allowed"
         [disabled]="!product.is_in_inventory"
     >
         {{ product.is_in_inventory ? 'Add to Cart' : 'Sold Out' }}

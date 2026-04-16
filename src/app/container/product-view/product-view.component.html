@@ -1,0 +1,170 @@
+<div class="min-h-screen bg-background font-public-sans pt-20" *ngIf="!loading && product; else loadingTemplate">
+  <!-- Architectural Header Detail -->
+  <main class="max-w-screen-2xl mx-auto px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="flex gap-2 mb-8 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">
+      <a routerLink="/" class="hover:text-primary transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-on-surface">{{ product.category }}</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <!-- Left: Product Gallery -->
+      <div class="lg:col-span-6 space-y-4">
+        <div class="bg-white rounded-xl overflow-hidden border border-outline-variant/10 shadow-sm p-3 max-h-[500px] flex items-center justify-center">
+          <img 
+            [src]="product.imageURL" 
+            alt="{{ product.name }}"
+            title="{{ product.name }}"
+            class="max-h-full object-contain hover:scale-105 transition-transform duration-700"
+          >
+        </div>
+        
+        <!-- Feature Highlights -->
+        <section class="grid grid-cols-3 gap-6 pt-8 border-t border-outline-variant/10">
+          <div>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Quality</h4>
+            <p class="text-[10px] leading-relaxed text-on-surface-variant/70">Crafted with high-quality materials for lasting durability.</p>
+          </div>
+          <div>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Style</h4>
+            <p class="text-[10px] leading-relaxed text-on-surface-variant/70">Designed to blend perfectly with your modern lifestyle.</p>
+          </div>
+          <div>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Delivery</h4>
+            <p class="text-[10px] leading-relaxed text-on-surface-variant/70">Fast and reliable shipping directly to your doorstep.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right: Narrative & Controls -->
+      <div class="lg:col-span-6 flex flex-col pt-4">
+        <h1 class="text-3xl font-black tracking-tighter text-on-surface leading-tight mb-4">
+          {{ product.name }}
+        </h1>
+
+        <!-- High-End Rating -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="flex text-primary">
+            <span class="material-symbols-outlined text-[14px] fill-[1]">star</span>
+            <span class="material-symbols-outlined text-[14px] fill-[1]">star</span>
+            <span class="material-symbols-outlined text-[14px] fill-[1]">star</span>
+            <span class="material-symbols-outlined text-[14px] fill-[1]">star</span>
+            <span class="material-symbols-outlined text-[14px]">star_half</span>
+          </div>
+          <span class="text-[10px] font-bold text-on-surface-variant opacity-70">4.8 (Verified Purchase)</span>
+        </div>
+
+        <div class="text-3xl font-bold text-primary mb-6 tracking-tighter">
+          Rs. {{ product.discountPrice ? product.discountPrice : product.price }}
+          <span class="text-base text-error line-through ml-3 opacity-30 font-medium" *ngIf="product.discountPrice">Rs. {{ product.price }}</span>
+        </div>
+
+        <p class="text-sm text-on-surface-variant leading-relaxed mb-8 max-w-md font-light">
+          {{ product.description }}
+        </p>
+
+        <!-- Dynamic Selectors (Conditional) -->
+        <div class="space-y-8 mb-10">
+          <div *ngIf="product.size && product.size.length > 0">
+            <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4 opacity-70">Select Size</h3>
+            <div class="flex gap-3">
+              <button 
+                *ngFor="let s of product.size"
+                (click)="selectedSize = s"
+                class="w-10 h-10 border flex items-center justify-center font-bold text-xs transition-all rounded-sm"
+                [ngClass]="selectedSize === s ? 'border-primary bg-primary text-white shadow-lg shadow-primary/20 scale-105' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary'"
+              >{{s}}</button>
+            </div>
+          </div>
+
+          <div *ngIf="product.color && product.color.length > 0">
+            <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-4 opacity-70">Select Color</h3>
+            <div class="flex gap-5">
+              <div 
+                *ngFor="let c of product.color"
+                (click)="selectedColor = c"
+                [style.background-color]="c === 'Default' ? '#cbd5e1' : c"
+                class="w-6 h-6 rounded-full border-2 cursor-pointer transition-all hover:scale-125"
+                [ngClass]="selectedColor === c ? 'border-primary ring-2 ring-primary/10 scale-110' : 'border-white shadow-sm'"
+                title="{{ c }}"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col gap-3 mb-10">
+          <button (click)="addToCart()" class="w-full py-4 bg-primary text-on-primary text-xs font-bold rounded-lg hover:opacity-90 transition-all shadow-xl shadow-primary/10 flex items-center justify-center gap-2 uppercase tracking-widest">
+            <span class="material-symbols-outlined text-sm">shopping_cart</span>
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Technical Architecture (The Bento Grid) -->
+        <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
+            <div>
+              <h3 class="text-[9px] font-black uppercase tracking-[0.3em] text-on-surface-variant mb-6 opacity-50">Product Specifications</h3>
+              <div class="grid grid-cols-2 gap-y-6 gap-x-4">
+                <div>
+                  <div class="text-[9px] uppercase font-bold text-on-surface-variant mb-1 opacity-50">Brand</div>
+                  <div class="text-xs font-bold text-on-surface tracking-tight">{{ product.brand }}</div>
+                </div>
+                <div>
+                  <div class="text-[9px] uppercase font-bold text-on-surface-variant mb-1 opacity-50">Product SKU</div>
+                  <div class="text-xs font-bold text-on-surface tracking-tight text-uppercase">{{ product.id }}</div>
+                </div>
+                <div>
+                  <div class="text-[9px] uppercase font-bold text-on-surface-variant mb-1 opacity-50">Category</div>
+                  <div class="text-xs font-bold text-on-surface tracking-tight">{{ product.category }}</div>
+                </div>
+                <div>
+                  <div class="text-[9px] uppercase font-bold text-on-surface-variant mb-1 opacity-50">Availability</div>
+                  <div class="text-xs font-bold" [ngClass]="product.is_in_inventory ? 'text-green-600' : 'text-error'">
+                    {{ product.is_in_inventory ? 'In Stock' : 'Out of Stock' }} 
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frequently Bought Together Mockup -->
+    <section class="mt-16">
+        <h2 class="text-xl font-black tracking-tighter mb-8 text-on-surface">The Professional Bundle</h2>
+        <div class="bg-white p-8 rounded-xl border border-outline-variant/10 flex flex-col md:flex-row items-center gap-10 shadow-sm">
+            <div class="flex items-center gap-8">
+                <div class="w-24 h-24 bg-surface-container-low p-3 rounded-lg flex items-center justify-center">
+                    <img [src]="product.imageURL" alt="{{ product.name }}" title="{{ product.name }}" class="max-w-full max-h-full object-contain">
+                </div>
+                <span class="material-symbols-outlined text-outline-variant scale-110">add</span>
+                <div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center opacity-30 border border-dashed border-outline-variant">
+                    <span class="material-symbols-outlined text-sm">package_2</span>
+                </div>
+            </div>
+            <div class="flex-1 md:border-l border-outline-variant/20 md:pl-10 text-center md:text-left">
+                <div class="text-on-surface-variant text-[10px] font-bold uppercase tracking-[0.2em] mb-2 opacity-60">Total Bundle Value</div>
+                <div class="text-2xl font-black text-primary mb-6 tracking-tighter">
+                  Rs. {{ (product.discountPrice ? product.discountPrice : product.price) + 499 }}
+                  <span class="text-xs text-error line-through ml-3 opacity-30 font-bold italic">PRO BUNDLE</span>
+                </div>
+                <button class="px-8 py-3 bg-primary text-white font-black rounded-lg hover:opacity-90 transition-all text-[10px] uppercase tracking-widest shadow-lg shadow-primary/10">
+                    Assemble Bundle
+                </button>
+            </div>
+        </div>
+    </section>
+  </main>
+</div>
+
+<!-- Placeholder Templates -->
+<ng-template #loadingTemplate>
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="animate-pulse flex flex-col items-center gap-4">
+      <div class="text-2xl font-black tracking-widest text-primary animate-bounce">E-KART</div>
+      <div class="text-[10px] uppercase font-bold tracking-[0.5em] text-on-surface-variant">Gathering details...</div>
+    </div>
+  </div>
+</ng-template>
